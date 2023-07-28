@@ -48,10 +48,13 @@ public class BoardController {
 		//RedirectAttributes
 		//등록작업이 끝난 후 다시 목록화면으로 이동하기 위함
 		//추가적으로 새롭게 등록한 게시물의 번호를 같이 전달하기 위해 사용
+		log.info("==========================================");
 		log.info("register : " + board);
+		log.info("==========================================");
 		service.register(board);
-		rttr.addAttribute("result", "등록");
-		return "redirect:/board/list2";
+		rttr.addAttribute("result", board.getBno());
+		
+		return "redirect:/board/list";
 	}
 	//게시글 1개 조회
 	@GetMapping({"/get", "/modify"})

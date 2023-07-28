@@ -30,6 +30,9 @@ public interface BoardMapper {
 	//전체 데이터 개수
 	public int getTotalCount(Criteria cri);
 	
+	//insert메소드2 등록된 번호 받기
+	public void insertSelectKey(BoardVO vo);
+	
 	//검색 연습
 	//Map<키:String, 값:Map타입>
 	public List<BoardVO> searchTest(Map<String, Map<String, String>> map);

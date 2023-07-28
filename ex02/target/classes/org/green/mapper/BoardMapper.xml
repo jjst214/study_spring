@@ -27,6 +27,13 @@
 		insert into tbl_board(bno, title, content, writer)
 		values(seq_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="AFTER" resultType="long">
+			select seq_board.currval from dual
+		</selectKey>
+		insert into tbl_board(bno, title, content, writer)
+		values(seq_board.nextval, #{title}, #{content}, #{writer})
+	</insert>
 	<select id="read" resultType="org.green.domain.BoardVO">
 		select * from tbl_board where bno = #{bno}
 	</select>
