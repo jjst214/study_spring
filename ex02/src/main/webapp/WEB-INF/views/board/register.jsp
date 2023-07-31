@@ -72,7 +72,7 @@
 				let inputFile = $("input[name='uploadFile']");
 				let files = inputFile[0].files;
 				console.log(files);
-				for(let i=0;i<files.length;i++){
+				for(let i=0; i<files.length; i++){
 					formData.append("uploadFile",files[i]);
 				}
 				$.ajax({
@@ -90,14 +90,19 @@
 			})
 			
 			function showUploadResult(uploadResultArr){
-				if(!uploadResultArr || uploadResultArr.length==0){return;}
+				//결과 배열이 null이거나 길이가 0이면 함수종료 
+				if(!uploadResultArr || uploadResultArr.length==0) { return; }
 				let uploadul = $(".uploadResult ul");
 				let str = "";
 				$(uploadResultArr).each(function(i, obj){
-					let fileCallpath = encodeURIComponent(obj.uploadPath+"/s_"+obj.fileName);
+					console.log(obj);
+					let fileCallpath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
 					str += "<li data-path='"+obj.uploadPath+"' data-filename='"+obj.fileName+"'"
 					+"data-uuid='"+obj.uuid+"' data-type='"+obj.image+"'>"
 					+"<img src='/display?fileName="+fileCallpath+"'/>"
+				    +"<button class='btn' data-file=\'"+fileCallpath+"\' data-type='image'>"
+					+"삭제</button>"
+				    +"</li>"
 				})
 				uploadul.append(str);
 			}
@@ -130,7 +135,7 @@
 				let targetLi = $(this).closest("li");
 				let type = $(this).data("type");
 				$.ajax({
-					url: 'deleteFile',
+					url: '/deleteFile',
 					data: {fileName: targetFile, type: type},
 					dataType: 'text',
 					type: 'POST',

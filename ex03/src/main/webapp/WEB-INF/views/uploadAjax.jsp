@@ -31,7 +31,8 @@
 				$(uploadResultArr).each(function(i, obj){
 					//str += "<li>"+obj.fileName+"</li>";
 					let fileCallpath = encodeURIComponent(obj.uploadPath+"/s_"+obj.fileName);
-					str += "<li><img src='/display?fileName="+fileCallpath+"'/></li>"
+					str += "<li><img src='/display?fileName="+fileCallpath+"'/>"+
+							"<span class='imgDeleteBtn' data-file=\'"+fileCallpath+"\' data-type='image'>X</span>"+"</li>"
 				})
 				uploadResult.append(str);
 			}
@@ -50,6 +51,23 @@
 				}
 				return true;
 			}
+			
+			//파일 삭제 'X'표시에 대한 이벤트 처리
+			$(".uploadResult").on("click","span", function(e){
+				let targetFile = $(this).data("file");
+				let type = $(this).data("type");
+				console.log(targetFile);
+				$.ajax({
+					url:'/deleteFile',	//요청경로
+					data:{fileName: targetFile, type: type},	//전송테이터
+					dataType: 'text',	//응답데이터타입
+					type: 'POST',		//전송메소드타입
+					success: function(result){	//전송성공시 실행
+						alert(result);
+					}
+				})
+			})
+			
 			$("#uploadBtn").on('click', function(){
 				let formData = new FormData();
 				let inputFile = $("input[name='uploadFile']");

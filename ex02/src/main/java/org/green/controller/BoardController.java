@@ -1,9 +1,19 @@
 package org.green.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+import org.green.domain.BoardAttachVO;
 import org.green.domain.BoardVO;
 import org.green.domain.Criteria;
 import org.green.domain.PageDTO;
 import org.green.service.BoardService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
@@ -79,10 +90,39 @@ public class BoardController {
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
 		log.info("remove : " + bno);
+		List<BoardAttachVO> attachList = service.getAttachList(bno);
 		if(service.remove(bno)) {
+			//첨부파일 삭제(로컬에 저장된 실제파일) 메소드 호출
+			deleteFiles(attachList);
 			rttr.addAttribute("result", "삭제");
 		}
 		return "redirect:/board/list";
 	}
+	//특정 게시물 번호의 첨부파일과 관련돈 데이터를 json으로 반환하는 메소드
+	@GetMapping(value="/getAttachList", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
+		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
+	}
 	
+	//파일 삭제 메소드
+	private void deleteFiles(List<BoardAttachVO> attachList) {
+		if(attachList == null || attachList.size()==0) {
+			return;
+		}
+		attachList.forEach(attach->{
+			Path file = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\s_"+attach.getUuid()+"_"+attach.getFileName());
+			try {
+				//deleteIfExists = 파일이 있을경우 삭제
+				Files.deleteIfExists(file);
+				//이미지일 경우 썸네일 이미지도 삭제
+				if(Files.probeContentType(file).startsWith("image")) {
+					Path thumbNail = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\"+attach.getUuid()+"_"+attach.getFileName());
+					Files.delete(thumbNail);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 }

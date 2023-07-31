@@ -2,6 +2,7 @@ package org.green.service;
 
 import java.util.List;
 
+import org.green.domain.BoardAttachVO;
 import org.green.domain.BoardVO;
 import org.green.domain.Criteria;
 
@@ -18,4 +19,6 @@ public interface BoardService {
 	public List<BoardVO> getList(Criteria cri);
 	//게시글 총 갯수 반환
 	public int getTotal(Criteria cri);
+	//게시글 번호에 맞는 BoardAttachVO받기
+	public List<BoardAttachVO> getAttachList(Long bno);
 }

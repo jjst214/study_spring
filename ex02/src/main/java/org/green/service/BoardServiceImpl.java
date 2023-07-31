@@ -2,6 +2,7 @@ package org.green.service;
 
 import java.util.List;
 
+import org.green.domain.BoardAttachVO;
 import org.green.domain.BoardVO;
 import org.green.domain.Criteria;
 import org.green.mapper.BoardAttachMapper;
@@ -49,6 +50,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean remove(Long bno) {
 		log.info("삭제하기 : " + bno);
+		//첨부파일 삭제하기(db)
+		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
 
@@ -61,6 +64,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		log.info("첨부리스트 게시글 번호 : " + bno);
+		return attachMapper.findByBno(bno);
 	}
 	
 	
