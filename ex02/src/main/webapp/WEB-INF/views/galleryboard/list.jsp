@@ -32,8 +32,7 @@
 												<td>번호</td>
 												<td>제목</td>
 												<td>작성자</td>
-												<td>작성일</td>
-												<td>수정일</td>
+												<td>카테고리</td>
 											</tr>
                                     </thead>
                                     <tfoot>
@@ -41,19 +40,17 @@
 												<td>번호</td>
 												<td>제목</td>
 												<td>작성자</td>
-												<td>작성일</td>
-												<td>수정일</td>
+												<td>카테고리</td>
 											</tr>
                                     </tfoot>
                                     <tbody>
-                                    	<c:forEach items="${list }" var="board">
+                                    	<c:forEach items="${glist }" var="board">
 											<tr>
-												<td><c:out value="${board.bno }"></c:out></td>
-												<td><a href="/board/get?bno=${board.bno}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">
+												<td><c:out value="${board.gno }"></c:out></td>
+												<td><a href="/galleryboard/gget?gno=${board.gno}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">
 												<c:out value="${board.title }"/></a></td>
 												<td><c:out value="${board.writer }"></c:out></td>
-												<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
-												<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updatedate }"/></td>
+												<td><c:out value="${board.category }"></c:out></td>
 											</tr>
 										</c:forEach>
                                     </tbody>

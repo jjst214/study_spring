@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.green.domain.AttachFileDTO;
+import org.green.domain.GalleryBoardVO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -128,6 +129,7 @@ public class UploadController {
 		}
 		return new ResponseEntity<List<AttachFileDTO>>(list, HttpStatus.OK);
 	}
+
 	//썸네일 데이터 전송하기
 	//fileName을 전달받고 byte전송해줌
 	@GetMapping("/display")

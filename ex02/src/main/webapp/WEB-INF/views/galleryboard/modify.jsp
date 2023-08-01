@@ -9,11 +9,11 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 	<h2>수정하기</h2>
-	<form class="modify" method="post" action="/board/modify">
+	<form class="modify" method="post" action="/galleryboard/modify">
 	<table>
 		<input type="hidden" name="pageNum" value="${cri.pageNum }"/>
 		<input type="hidden" name="amount" value="${cri.amount }"/>
-		<input type="hidden" name="bno" value="${board.bno }"/>
+		<input type="hidden" name="gno" value="${board.gno }"/>
 		<input type="hidden" name="type" value="${cri.type }"/>
 		<input type="hidden" name="keyword" value="${cri.keyword }"/>
 		<tr>
@@ -62,18 +62,18 @@
 	$(document).ready(function(){
 			//페이지가 로드되면 스스로 실행되는 함수
 			(function(){
-				let bno = '<c:out value="${board.bno}"/>';
-				$.getJSON("/board/getAttachList",{bno:bno},
+				let gno = '<c:out value="${board.gno}"/>';
+				$.getJSON("/board/getAttachList",{gno:gno},
 					function(arr){
 						console.log(arr);
 						//이미지 나타내기
 						let str = "";
 						$(arr).each(function(i, attach){
-							let fileCallpath = encodeURIComponent(attach.uploadPath+"/s_"+attach.uuid+"_"+attach.fileName);
+							let fileCallpath = encodeURIComponent(attach.uploadPath+"/s_"+attach.fileName);
 							str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"'";
-							str += "data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'>";
+							str += "data-filename='"+attach.filename+"'>";
 							str += "<div><img src='/display?fileName="+fileCallpath+"'/>";
-							str += "<button class='btn' data-type='image' data-file='"+fileCallpath+"'>삭제</button>";
+							str += "<button class='btn' data-file='"+fileCallpath+"'>삭제</button>";
 							str += "</div></li>";
 						})
 						$(".uploadResult ul").html(str);
@@ -118,11 +118,11 @@
 				let str = "";
 				$(uploadResultArr).each(function(i, obj){
 					console.log(obj);
-					let fileCallpath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
-					str += "<li data-path='"+obj.uploadPath+"' data-filename='"+obj.fileName+"'"
-					+"data-uuid='"+obj.uuid+"' data-type='"+obj.image+"'>"
-					+"<img src='/display?fileName="+fileCallpath+"'/>"
-				    +"<button class='btn' data-file=\'"+fileCallpath+"\' data-type='image'>"
+					let fileCallpath = encodeURIComponent(obj.uploadpath+"/s_"+obj.filename);
+					str += "<li data-path='"+obj.uploadpath+"' data-filename='"+obj.filename+"'"
+					+">"
+					+"<img src='/display?filename="+fileCallpath+"'/>"
+				    +"<button class='btn' data-file=\'"+fileCallpath+"\'>"
 					+"삭제</button>"
 				    +"</li>"
 				})
@@ -137,10 +137,8 @@
 				let str = "";
 				$(".uploadResult ul li").each(function(i, obj){
 					let jobj = $(obj);
-					str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'/>";
-					str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'/>";
-					str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'/>";
-					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'/>";
+					str += "<input type='hidden' name='fileName' value='"+jobj.data("filename")+"'/>";
+					str += "<input type='hidden' name='uploadpath' value='"+jobj.data("path")+"'/>";
 				})
 				//폼에 데이터 추가 append(), submit() 전송하기
 				formObj.append(str).submit();

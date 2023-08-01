@@ -44,7 +44,17 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean modify(BoardVO board) {
 		log.info("수정하기 : " + board);
-		return mapper.update(board) == 1;
+		//bno 번호에 해당하는 첨부파일 게시글 삭제
+		attachMapper.deleteAll(board.getBno());
+		//board테이블 수정
+		boolean modifyResult = mapper.update(board) == 1;
+		if(board.getAttachList() != null || board.getAttachList().size() > 0) {
+			board.getAttachList().forEach(attach->{
+				attach.setBno(board.getBno());
+				attachMapper.insert(attach);
+			});
+		}
+		return modifyResult; 
 	}
 
 	@Override
