@@ -4,7 +4,7 @@
 <mapper namespace="org.green.mapper.GalleryBoardMapper">
 	
 	<select id="getList" resultType="org.green.domain.GalleryBoardVO">
-		select * from tbl_gallery where gno > 0 order by gno desc;
+		select * from tbl_gallery where gno > 0 order by gno desc
 	</select>
 	<insert id="insert">
 		insert into tbl_gallery(gno, title, writer, filename, uploadpath, fullname, category, content) 

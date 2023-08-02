@@ -15,6 +15,6 @@ public interface GalleryBoardService {
 	//삭제
 	public boolean remove(int gno);
 	//게시글 전체 조회
-	public List<GalleryBoardVO> getList(Criteria cri);
+	public List<GalleryBoardVO> getList();
 	//게시글 총 갯수
 }

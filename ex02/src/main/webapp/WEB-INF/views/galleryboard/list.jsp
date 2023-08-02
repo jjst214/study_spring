@@ -18,50 +18,24 @@
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        	<tr>
-												<td>번호</td>
-												<td>제목</td>
-												<td>작성자</td>
-												<td>카테고리</td>
-											</tr>
-                                    </thead>
-                                    <tfoot>
-											<tr>
-												<td>번호</td>
-												<td>제목</td>
-												<td>작성자</td>
-												<td>카테고리</td>
-											</tr>
-                                    </tfoot>
-                                    <tbody>
-                                    	<c:forEach items="${glist }" var="board">
-											<tr>
-												<td><c:out value="${board.gno }"></c:out></td>
-												<td><a href="/galleryboard/gget?gno=${board.gno}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">
-												<c:out value="${board.title }"/></a></td>
-												<td><c:out value="${board.writer }"></c:out></td>
-												<td><c:out value="${board.category }"></c:out></td>
-											</tr>
-										</c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+          
+					<h2>갤러리 리스트 페이지 입니다.</h2>
+                    <ul>
+                    	<c:forEach items="${list }" var="board">
+	                    	<li>
+	                    		<a href="/galleryboard/view?gno=${board.gno }">
+	                    		<img src="/display?fileName=${board.fullname }" width="300px" height="300px"/>
+	                    		<p><c:out value="${board.title }"></c:out></p>
+	                    		<p><c:out value="${board.writer }"></c:out></p>
+	                    		</a>
+	                    	</li>
+	                    </c:forEach>
+                    </ul>
+                        
+                    
 
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
         </div>

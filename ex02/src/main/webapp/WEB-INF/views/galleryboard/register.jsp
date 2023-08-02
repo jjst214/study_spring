@@ -101,7 +101,7 @@ $(document).ready(function(){
 		$(uploadResultArr).each(function(i, obj){
 			console.log(obj);
 			let fileCallpath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
-			let filePullpath = encodeURIComponent(obj.uploadPath+obj.uuid+"_"+obj.fileName);
+			let filePullpath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
 			str += "<li data-path='"+obj.uploadPath+"' data-fileName='"+obj.uuid+"_"+obj.fileName+"'"
 			+"data-fullname='"+filePullpath+"'>"
 			+"<img src='/display?fileName="+fileCallpath+"'/>"

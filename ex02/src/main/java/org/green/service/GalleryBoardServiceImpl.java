@@ -30,7 +30,7 @@ public class GalleryBoardServiceImpl implements GalleryBoardService {
 
 	@Override
 	public boolean modify(GalleryBoardVO gboard) {
-		// TODO Auto-generated method stub
+		
 		return mapper.update(gboard) == 1;
 	}
 
@@ -41,7 +41,7 @@ public class GalleryBoardServiceImpl implements GalleryBoardService {
 	}
 
 	@Override
-	public List<GalleryBoardVO> getList(Criteria cri) {
+	public List<GalleryBoardVO> getList() {
 		// TODO Auto-generated method stub
 		List<GalleryBoardVO> galleryList = mapper.getList();
 		return galleryList;

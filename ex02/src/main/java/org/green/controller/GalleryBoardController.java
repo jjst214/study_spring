@@ -33,8 +33,8 @@ public class GalleryBoardController {
 	private GalleryBoardService service;
 	
 	@GetMapping("/list")
-	public void list() {
-		
+	public void list(Model model) {
+		model.addAttribute("list", service.getList());
 	}
 	
 	//등록 페이지
@@ -55,47 +55,33 @@ public class GalleryBoardController {
 		return "redirect:/galleryboard/list";
 	}
 	//글 상세조회
-	@GetMapping({"/gget", "/gmodify"})
-	public void get(@RequestParam("gno") int gno, @ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping({"/view","/modify"})
+	public void get(int gno, Model model) {
 		model.addAttribute("board", service.get(gno));
 	}
 	//수정
 	@PostMapping("/modify")
-	public String modify(GalleryBoardVO gboard, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		if(service.modify(gboard)) {
-			rttr.addAttribute("result", "수정");
-		}
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/galleryboard/gallerylist";
+	public String modify(GalleryBoardVO gboard) {
+		service.modify(gboard);
+		
+		return "redirect:/galleryboard/list";
 	}
 	//삭제
-	@PostMapping("/gremove")
-	public String remove(int gno, RedirectAttributes rttr) {
-		GalleryBoardVO gboard = service.get(gno);
-		if(service.remove(gno)) {
-			deleteFiles(gboard);
-			rttr.addAttribute("result","삭제");
-		}
-		return "redirect:/galleryboard/gallerylist";
+	@PostMapping("/remove")
+	public String remove(int gno, String uploadPath, String fileName) {
+		//로컬에 저장된 파일 삭제
+		deleteFile(uploadPath, fileName);
+		//db에 저장된 게시글 삭제
+		service.remove(gno);
+		return "redirect:/galleryboard/list";
 	}
 	//파일 삭제 메소드
-		private void deleteFiles(GalleryBoardVO gboard) {
-			if(gboard == null) {
-				return;
-			}
-			
-		Path file = Paths.get("C:\\upload\\"+gboard.getUploadPath()+gboard.getFileName());
+	private void deleteFile(String uploadPath, String fileName) {
+		Path file = Paths.get("c:\\upload\\"+uploadPath+"\\"+fileName);
 		try {
-			//deleteIfExists = 파일이 있을경우 삭제
-			Files.deleteIfExists(file);
-			//이미지일 경우 썸네일 이미지도 삭제
-			if(Files.probeContentType(file).startsWith("image")) {
-				Path thumbNail = Paths.get("C:\\upload\\"+gboard.getUploadPath()+"\\s_"+gboard.getFileName());
-				Files.delete(thumbNail);
-			}
+			Files.delete(file);
+			Path thumbNail = Paths.get("c:\\upload\\"+uploadPath+"\\s_"+fileName);
+			Files.delete(thumbNail);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -74,6 +74,8 @@
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="/board/list2">게시글보기</a>
                         <a class="collapse-item" href="/board/register">글등록</a>
+                        <a class="collapse-item" href="/galleryboard/list">갤러리게시글</a>
+                        <a class="collapse-item" href="/galleryboard/register">갤러리글등록</a>
                     </div>
                 </div>
             </li>
