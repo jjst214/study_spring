@@ -18,7 +18,7 @@ public interface BoardMapper {
 	//read --> select처리
 	public BoardVO read(Long bno);
 	
-	//delte --> delete처리
+	//delete --> delete처리
 	public int delete(Long bno);
 	
 	//update --> update처리
