@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.green.mapper.BookAttachMapper">
+	<insert id="insert">
+		insert into book_attach(bno, uuid, uploadpath, filename, filetype) 
+		values(seq_bookattach.nextval, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
+	</insert>
+	<delete id="delete">
+		delete from book_attach where uuid=#{uuid}
+	</delete>
+	<select id="findByBno" resultType="org.green.domain.BookAttachVO">
+		select * from book_attach where bno=#{bno}
+	</select>
+	<delete id="deleteAll">
+		delete from book_attach where bno=#{bno}
+	</delete>
+</mapper>

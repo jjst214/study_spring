@@ -2,6 +2,9 @@ package org.green.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+import javax.sql.DataSource;
 
 import org.junit.Test;
 
@@ -22,6 +25,15 @@ public class JDBCTests {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	@Test
+	public void inbook() {
+		String sql = "insert into book values(seq_book.nextval, ?, ?, ?, ?, sysdate)";
+		Connection con = null;
+		DataSource ds = null;
+		PreparedStatement psmt = null;
 		
 	}
 }

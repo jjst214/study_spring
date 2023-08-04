@@ -1,61 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp" %>
-		<!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                
-                
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
-          
-					<h2>갤러리 등록 페이지 입니다.</h2>
-					
-                    <form class="gallery" method="post" action="/galleryboard/register">
+				<h2>등록 페이지 입니다.</h2>
+			
+                  <form class="book" method="post" action="/book/addBook">
                       <div class="form-group row">
                           <div class="col-sm-12 mb-3 mb-sm-0">
                               <input type="text" class="form-control" id="exampleFirstName"
-                                  placeholder="제목" name="title" required>
+                                  placeholder="도서제목" name="bname" required>
                           </div>
                           <div class="col-sm-12">
                               <input type="text" class="form-control" id="exampleLastName"
-                                  placeholder="글쓴이" name="writer" required>
+                                  placeholder="작가" name="bauthor" required>
                           </div>
                           <div class="col-sm-12">
-                              <select name="category">
-                              	<option value="all" selected>종류</option>
-                              	<option value="cat" >cat</option>
-                              	<option value="dog">dog</option>
-                              </select>
+                              <input type="text" class="form-control" id="exampleLastName"
+                                  placeholder="출판사명" name="bpublisher" required>
                           </div>
                           <div class="col-sm-12">
-                          	<div class="panel panel-default">
-					            <div class="panel-heading">파일 첨부</div>
-					            <div class="panel-body">
-					               <div class="uploadDiv">
-					                  <input type="file" name="uploadFile" />
-					               </div>
-					               <div class="uploadResult">
-					                  <ul>
-					                     
-					                  </ul>
-					               </div>
-					            </div>
-					         </div>
+                              <input type="number" placeholder="가격" name="bprice"/>
                           </div>
                           <div class="col-sm-12">
-								<textarea rows="" cols="" class="form-control"
-								 id="exampleLastName" name="content" placeholder="내용" required></textarea>
+                              <input type="date" placeholder="출판일" name="bpubdate"/>
                           </div>
                           <div>
                           		<button type="submit" class="btn btn-primary btn-user" >등록</button>
@@ -63,14 +29,30 @@
                           </div>
                       </div>
                   	</form>
-				</div>
-			</div>
-		</div>
+					<!-- 새로 추가되는 부분 -->
+				   <div class="row">
+				      <div class="col-lg-12">
+				         <div class="panel panel-default">
+				            <div class="panel-heading">파일 첨부</div>
+				            <div class="panel-body">
+				               <div class="uploadDiv">
+				                  <input type="file" name="uploadFile" multiple />
+				               </div>
+				               <div class="uploadResult">
+				                  <ul>
+				                     
+				                  </ul>
+				               </div>
+				            </div>
+				         </div>
+				      </div>
+				   </div>
+</body>
 <script>
 $(document).ready(function(){
 	//input태그중 type이 file요소 선택
 	//요소의 변경이 있으면 콜백함수실행
-	$("input[type='file']").change(function(){
+	$("input[name='uploadFile']").change(function(){
 		//가상의 폼을 생성(폼태그)
 		let formData = new FormData();
 		let inputFile = $("input[name='uploadFile']");
@@ -101,9 +83,8 @@ $(document).ready(function(){
 		$(uploadResultArr).each(function(i, obj){
 			console.log(obj);
 			let fileCallpath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
-			let filePullpath = encodeURIComponent(obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName);
-			str += "<li data-path='"+obj.uploadPath+"' data-fileName='"+obj.uuid+"_"+obj.fileName+"'"
-			+"data-fullname='"+filePullpath+"'>"
+			str += "<li data-path='"+obj.uploadPath+"' data-filename='"+obj.fileName+"'"
+			+"data-uuid='"+obj.uuid+"' data-type='"+obj.image+"'>"
 			+"<img src='/display?fileName="+fileCallpath+"'/>"
 		    +"<button class='btn' data-file=\'"+fileCallpath+"\' data-type='image'>"
 			+"삭제</button>"
@@ -116,7 +97,7 @@ $(document).ready(function(){
 	$("button[type='submit']").on("click", function(e){
 		//연결된 이벤트 제거(submit 전송 제거)
 		e.preventDefault();
-		let formObj = $("form.user");
+		let formObj = $("form.book");
 		console.log("submit클릭");
 		let str = "";
 		$(".uploadResult ul li").each(function(i, obj){
@@ -153,4 +134,4 @@ $(document).ready(function(){
 })
 	
 </script>
-<%@ include file="../includes/footer.jsp" %>
+</html>

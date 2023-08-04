@@ -1,13 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="../includes/header.jsp" %>
 <title>Insert title here</title>
 <style>
+	body{
+		margin:0 auto;
+		width:100%;
+		max-width:1200px;
+		height:100vh;
+	}
+	li{
+		background:tomato;
+		list-style:none;
+		margin:10px 0; 
+	}
+	.item{
+		width:250px;
+		height:300px;
+	}
+	.gallery{
+		display:flex;
+		justify-content:space-around;
+		flex-wrap:wrap;
+		
+	}
 	#modal{
 		width:100%;
 		height:100vh;
@@ -25,30 +41,21 @@
 		border-radius:10px;	
 	}
 </style>
-</head>
-<body>
-	<h1>리스트페이지</h1>
-	<table>
-		<tr>
-			<td>번호</td>
-			<td>제목</td>
-			<td>작성자</td>
-			<td>작성일</td>
-			<td>수정일</td>
-		</tr>
-		<c:forEach items="${list }" var="board">
-			<tr>
-				<td><c:out value="${board.bno }"></c:out></td>
-				<td><a href="/board/get?bno=${board.bno}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">
-				<c:out value="${board.title }"/></a></td>
-				<td><c:out value="${board.writer }"></c:out></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updatedate }"/></td>
-			</tr>
-		</c:forEach>
-	</table>
-	<!-- 검색추가하기 -->
-	<form method="get" action="/board/list">
+	<h2 style="text-align:center;">BOOK LIST</h2>
+	<ul class="gallery">
+    	<c:forEach items="${list }" var="list">
+     	<li class="item">
+     		<a href="/book/view?bno=${list.bno }">
+     		<img src="/display?fileName=">
+     		<p></p>
+     		<p></p>
+     		</a>
+     	</li>
+     	</c:forEach>
+    </ul>
+    
+    <!-- 검색추가하기 -->
+	<form method="get" action="/book/list">
 	
 	<select name="type">
 		<option value="N" <c:out value="${pageMaker.cri.type == 'N' ? 'selected' : ''}"/>>제목</option>
@@ -79,7 +86,7 @@
 		</ul>
 	</div>
 	<!-- 페이징 추가 끝 -->
-	<p><button onclick="location.href='/board/register'">게시글등록</button></p>
+	<p><button onclick="location.href='/book/addBook'">게시글등록</button></p>
 	<!-- 모달 추가 -->
 	<div id="modal">
 		<div id="modalbox">
@@ -91,6 +98,7 @@
 		</div>
 	</div>
 	<script>
+	
 		let result = '<c:out value="${param.result}"/>';
 		console.log(result);
 		checkModal(result);

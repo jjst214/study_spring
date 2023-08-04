@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.green.mapper.BookMapper">
+	<sql id="criteria">
+		<!-- prefix=앞에 쿼리추가 / suffix=뒤에 쿼리추가 -->
+		<trim prefix="where(" suffix=")">
+			<if test="typeArr != null">
+			<foreach item="type" collection="typeArr" separator="or">
+				<choose>
+					<when test="type == 'N'.toString()">
+				 		bname like '%'||#{keyword}||'%'
+				 	</when>
+					<when test="type == 'P'.toString()">
+				 		bpublisher like '%'||#{keyword}||'%'
+				 	</when>
+					<when test="type == 'A'.toString()">
+				 		bauthor like '%'||#{keyword}||'%'
+				 	</when>
+			 	</choose>
+			</foreach>
+			</if>
+		</trim>
+	</sql>
+	<select id="read" resultType="org.green.domain.BookVO">
+		select * from book where bno = #{bno}
+	</select>
+	<select id="getListWithPaging" resultType="org.green.domain.BookVO">
+		select * from (select Tb.*, rownum rNum from(select * from book
+			<include refid="criteria"></include>
+		 order by bno desc) Tb)
+		  where rNum between (#{pageNum}-1)*#{amount}+1 and #{pageNum} * #{amount}
+	</select>
+	<insert id="insert">
+		insert into book values(seq_book.nextval, #{bname}, #{bpublisher}, #{bauthor}, #{bprice}, #{bpubdate})
+	</insert>
+	<update id="update">
+		update book set = bname=#{bname}, bpublisher=#{bpublisher}, bauthor=#{bauthor}, bprice=#{bprice}, bpubdate=#{bpubdate}
+		 where bno=#{bno}
+	</update>
+	<delete id="delete">
+		delete from book where bno=#{bno}
+	</delete>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from book <include refid="criteria"></include>
+	</select>
+	<select id="searchTest" resultType="org.green.domain.BookVO">
+		select * from book
+		<!-- prefix=앞에 쿼리추가 / suffix=뒤에 쿼리추가 -->
+		<include refid="criteria"></include>
+	</select>
+</mapper>

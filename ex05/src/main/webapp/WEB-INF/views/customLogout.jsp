@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>admin 페이지 입니다.</h2>
-	<a href="/customLogout">로그아웃</a>
+	<h2>로그아웃 페이지</h2>
+	<form action="/customLogout" method="post">
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+		<button>로그아웃</button>
+	</form>
 </body>
 </html>

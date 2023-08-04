@@ -16,4 +16,23 @@ public class CommonController {
 		model.addAttribute("msg", "접근 거부");
 		
 	}
+	
+	@GetMapping("/customLogin")
+	public void loginInput(String error, String logout, Model model) {
+		log.info("에러 : " + error);
+		log.info("로그아웃 : " + logout);
+		
+		//값이 있을경우
+		if(error != null) {
+			model.addAttribute("error", "로그인오류");
+		}
+		if(logout != null) {
+			model.addAttribute("logout", "로그아웃");
+		}
+	}
+	
+	@GetMapping("/customLogout")
+	public void logoutGet() {
+		log.info("로그아웃");
+	}
 }
