@@ -21,8 +21,10 @@
 		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
 		<!-- 4.<security:form-login login-page="/customLogin"/> -->
 		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
-		<security:logout logout-url="/customLogout" invalidate-session="true"/>
+		<!-- 로그아웃할때 remember-me, JSESSION_ID 쿠키 삭제 -->
+		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me, JSESSION_ID"/>
 		<security:access-denied-handler ref="customAccessDenied"/>
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 	</security:http>
 	<!-- 스프링 시큐리티가 동작하기 위해 필요한 존재 -->
 	<!-- 2.인증 매니저 -->
