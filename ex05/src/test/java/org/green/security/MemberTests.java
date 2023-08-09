@@ -29,8 +29,8 @@ public class MemberTests {
 	private DataSource ds;
 	@Test
 	public void testInsertMember() {
-		String sql = "insert into book values(seq_book.nextval, ?, ?, ?, ?, sysdate)";
-		for(int i=1; i<=50; i++) {
+		String sql = "insert into member values(seq_mno.nextval, ?, ?, ?, ?, ?, ?, sysdate, '1')";
+//		for(int i=1; i<=50; i++) {
 			Connection con = null;
 			PreparedStatement psmt = null;
 			
@@ -38,21 +38,13 @@ public class MemberTests {
 				con = ds.getConnection();
 				psmt = con.prepareStatement(sql);
 //				//비밀번호는 암호화로 등록
-//				psmt.setString(2, pwencoder.encode("pw"+i));
+				psmt.setString(2, pwencoder.encode("1234"));
 //				if(i<=30) {
-//					psmt.setString(1, "user"+i);
-//					psmt.setString(3, "일반사용자"+i);
-//				}else if(i<=40) {
-//					psmt.setString(1, "manager"+i);
-//					psmt.setString(3, "운영자"+i);
-//				}else {
-//					psmt.setString(1, "admin"+i);
-//					psmt.setString(3, "관리자"+i);
-//				}
-				psmt.setString(1, "테스트도서"+i);
-				psmt.setString(2, i+"출판사");
-				psmt.setString(3, "작가"+i);
-				psmt.setString(4, "1000"+i);
+					psmt.setString(1, "green");
+					psmt.setString(3, "김그린");
+					psmt.setString(4, "01013771566");
+					psmt.setString(5, "green@gmail.com");
+					psmt.setString(6, "울산광역시 삼산동");
 				psmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -72,7 +64,7 @@ public class MemberTests {
 					}
 				}
 			}
-		}
+//		}
 	}
 	
 	@Test

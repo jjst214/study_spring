@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.reserve.mapper.MemberMapper">
+	<!-- memberMap 이라는 이름을 가지는 resultMap은 
+		MemberVO객체의 인스턴스와 AuthVO객체의 인스턴스를 함께 구성 할 수 있음
+		mybatis는 1:N 관계의 결과를 처리 할 수 있는 <resultMap>태그를 지원
+	 -->
+	<resultMap type="org.reserve.domain.MemberVO" id="memberMap">
+		<id property="mid" column="mid"/>
+		<result property="mno" column="mno"/>
+		<result property="mid" column="mid"/>
+		<result property="mpw" column="mpw"/>
+		<result property="mname" column="mname"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="address" column="address"/>
+		<result property="regdate" column="regdate"/>
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	<resultMap type="org.reserve.domain.AuthVO" id="authMap">
+		<result property="mid" column="mid"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	<select id="read" resultMap="memberMap">
+		select mno, mem.mid, mpw, mname, phone, email, address, enabled, regdate, auth
+		from member mem left outer join auth auth
+		on mem.mid = auth.mid
+		where mem.mid = #{mid}
+	</select>
+	
+	<insert id="insert">
+		insert into member(mno, mid, mpw, mname, phone, email, address) values(seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{phone}, #{email}, #{address})
+	</insert>
+</mapper>
