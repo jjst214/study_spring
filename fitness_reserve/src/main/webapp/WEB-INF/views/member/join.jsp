@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,19 +20,25 @@ display: none;
 }
 </style>
 <body>
-	<label for="address2">아이디</label> 
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+	<label>아이디</label> 
 	<input type="text" id="id" name="mid" oninput = "checkId()" >
 								
 	<!-- id ajax 중복체크 -->
 	<span class="id_ok">사용 가능한 아이디입니다.</span>
-	<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+	<span class="id_already">사용중인 아이디입니다.</span>
 </body>
 <script>
 function checkId(){
-    var id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
+	let csrfHeaderName = "${_csrf.headerName}";
+	let csrfTokenValue = "${_csrf.token}";
+    let id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
     $.ajax({
         url:'/member/idCheck', //Controller에서 요청 받을 주소
-        type:'post', //POST 방식으로 전달
+        type:'post',
+        beforeSend:function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		},//POST 방식으로 전달
         data:{id:id},
         success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
             if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
