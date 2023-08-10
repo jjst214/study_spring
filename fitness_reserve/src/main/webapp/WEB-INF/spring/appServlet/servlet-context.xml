@@ -24,6 +24,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="org.reserve.controller" />
+	<context:component-scan base-package="org.reserve.domain" />
 	
 	<!-- 스프링 업로드 처리 MultipartResolver 객체를 빈으로 등록 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">

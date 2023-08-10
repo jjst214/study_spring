@@ -1,5 +1,6 @@
 package org.reserve.service;
 
+
 import org.reserve.domain.AuthVO;
 import org.reserve.domain.MemberVO;
 import org.reserve.mapper.AuthMapper;
@@ -22,11 +23,18 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
 	@Setter(onMethod_= {@Autowired})
 	private AuthMapper amapper;
+	
 	@Override
 	public void join(MemberVO mvo, AuthVO avo) {
 		mvo.setMpw(pwencoder.encode(mvo.getMpw()));
 		mapper.insert(mvo);
 		amapper.insert(avo);
+	}
+
+	@Override
+	public int idCheck(String mid) {
+		int cnt = mapper.idCheck(mid);
+		return cnt;
 	}
 	
 }

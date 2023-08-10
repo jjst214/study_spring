@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -29,14 +32,18 @@ public class MemberController {
 	}
 	
 	@PostMapping("/join")
-	@PostAuthorize("isAnonymous()")
-	public String doJoin(MemberVO mvo, AuthVO avo) {
-		log.info("입력아이디" + mvo.getMid());
-		log.info("입력비밀번호" + mvo.getMpw());
+	public String doJoin(MemberVO mvo, AuthVO avo) throws Exception {
 		if(mvo != null) {
 			service.join(mvo, avo);
 			log.info("가입완료");
 		}
+		
 		return "redirect:/board/list";
+	}
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("mid") String mid) {
+		int cnt = service.idCheck(mid); 
+		return cnt;
 	}
 }

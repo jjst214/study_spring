@@ -32,4 +32,8 @@
 	<insert id="insert">
 		insert into member(mno, mid, mpw, mname, phone, email, address) values(seq_mno.nextval, #{mid}, #{mpw}, #{mname}, #{phone}, #{email}, #{address})
 	</insert>
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType="int">
+		select count(*) from member where mid = #{mid}
+	</select>
 </mapper>

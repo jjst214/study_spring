@@ -27,4 +27,5 @@
 	</bean>
 	<mybatis-spring:scan base-package="org.reserve.mapper"/>
 	<context:component-scan base-package="org.reserve.service"/>
+	<context:component-scan base-package="org.reserve.domain"/>
 </beans>
