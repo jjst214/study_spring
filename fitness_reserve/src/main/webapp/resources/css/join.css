@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.inner{
+	width:100%;
+	max-width:1200px;
+	display: block;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+}
+.inner>div{
+	padding-top: 25px;
+}
+.id_ok{
+color:#008000;
+display: none;
+}
+.id_already{
+color:#6A82FB; 
+display: none;
+}
+.pw_ok{
+color:#008000;
+display: none;
+}
+.pw_mismatch{
+color:#6A82FB; 
+display: none;
+}
+.sign-up{
+	text-align: center;
+}
+.sub{
+	padding: 40px 0;
+}
+.sign-up .txt{
+	width:150px;
+	height:25px;
+}
+.sign-up .id{
+	position:relative;
+	width:600px;
+}
+.sign-up .id input{
+	width:150px;
+}
+.sign-up .id span{
+	line-height:30px;
+	position:absolute;
+	top:0;
+	right:220px;
+}
+.sign-up .pw{
+	position:relative;
+	width:600px;
+}
+.sign-up .pw label{
+	line-height:30px;
+	width:220px;
+	text-align:left;
+	position:absolute;
+	top:0;
+	right:160px;
+}
+.sign-up .form{
+	text-align:left;
+}
+.sign-up .name input{
+	width:100px;
+}
+.sign-up .phone input{
+	width:80px;
+}
+.inner table{
+	margin:0 auto;
+	border-collapse:separate;
+	border-spacing: 0 25px;
+}

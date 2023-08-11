@@ -3,6 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.reserve.mapper.AuthMapper">
 	<insert id="insert">
-		insert into auth values(#{mid}, #{auth})
+		insert into auth(mid) values(#{mid})
 	</insert>
 </mapper>

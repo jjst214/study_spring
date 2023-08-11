@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="includes/header.jsp" %>
 </head>
 <body>
 	<h2>로그인 페이지</h2>
@@ -18,5 +19,4 @@
 		<p><input type="submit" value="로그인"/></p>
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 	</form>
-</body>
-</html>
+<%@ include file="includes/footer.jsp" %>
