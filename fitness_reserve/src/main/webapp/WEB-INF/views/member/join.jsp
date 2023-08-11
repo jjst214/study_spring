@@ -188,8 +188,6 @@ $("#formsubmit").on("click",function(e){
 		return false;
 	}
 
-
-	
 	form.append(str).submit();
 })
 function checkReg(event){
@@ -217,97 +215,6 @@ function email_chk(val){
 	}
 }
 
-function validateForm(form) {
-	//전부 제대로 입력되었을 때
-	let pw_chk = document.querySelector('input[name="mpwChk"]');
-	let phone1 = document.querySelector('select[name="phone1"]');
-	let phone2 = document.querySelector('input[name="phone2"]');
-	let phone3 = document.querySelector('input[name="phone3"]');
-	let email1 = document.querySelector('input[name="email1"]');
-	let email2 = document.querySelector('select[name="email2"]');
-	let email3 = document.querySelector('input[name="email3"]');
-	let addr1 = document.querySelector('input[name="postcode"]');
-	let addr2 = document.querySelector('input[name="address"]');
-	let addr3 = document.querySelector('input[name="detailAddress"]');
-	let addr4 = document.querySelector('input[name="extraAddress"]');
-	
-	let str = "<input type='hidden' name='phone' value='"+phone1.value+phone2.value+phone3.value+"'/>";
-	
-	if(email2.value == "etc"){
-		str += "<input type='hidden' name='email' value='"+email1.value+"@"+email3.value+"'/>";	
-	}else if(email2.value != "etc"){
-		str += "<input type='hidden' name='email' value='"+email1.value+"@"+email2.value+"'/>";
-	}
-	str += "<input type='hidden' name='address' value='("+addr1.value+") "+addr2.value+"/"+addr3.value+"'/>";
-	phone1.remove();
-	phone2.remove();
-	phone3.remove();
-	email1.remove();
-	email2.remove();
-	email3.remove();
-	addr1.remove();
-	addr2.remove();
-	addr3.remove();
-	addr4.remove();
-	pw_chk.remove();
-	console.log(email3.value);
-	console.log(email3.value);
-	console.log(str);
-	if(form.mid.value == "") {
-		alert("아이디를 입력하세요");
-		form.mid.focus();
-		return false;
-	}			
-	if(form.mpw.value == "" || form.mpw.value != form.mpwChk.value) {
-		alert("비밀번호를 확인해주세요");
-		form.mpw.focus();
-		return false;
-	}
-	if(form.mname.value == "") {
-		alert("이름을 입력하세요");
-		form.mname.focus();
-		return false;
-	}		
-	if(form.phone1.value == "" || form.phone2.value == "" || form.phone3.value == "") {
-		alert("연락처를 입력하세요");
-		form.phone2.focus();
-		return false;
-	}
-	if(form.email2.value=="etc"){
-		if(form.email.value == "" || form.email3.value == "") {
-			alert("이메일을 입력하세요");
-			form.email.focus();
-			return false;
-		}
-	}else if(form.email2.value != "etc"){
-		if(form.email.value == "") {
-			alert("이메일을 입력하세요");
-			form.email.focus();
-			return false;
-		}
-	}
-	if(form.postcode.value == "" || form.address.value == "") {
-		alert("주소를 입력하세요");
-		form.postcode.focus();
-		return false;
-	}
-	if(form.detailAddress.value == "") {
-		alert("상세주소를 입력하세요");
-		form.detailAddress.focus();
-		return false;
-	}
-	if(form.id_chk.value == "false"){
-		alert("아이디를 확인해주세요");
-		form.mid.focus();
-		return false;
-	}
-	
-	
-	
-	
-	
-	form.append(str).submit();
-}
 $(document).ready(function(){
 	//요소의 변경이 있으면 콜백함수실행 
 	let csrfHeaderName = "${_csrf.headerName}";
