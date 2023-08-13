@@ -1,0 +1,13 @@
+package org.reserve.mapper;
+
+import java.util.List;
+
+import org.reserve.domain.ReserveVO;
+
+public interface ReserveMapper {
+	public int insertReserve(ReserveVO rvo);
+	
+//	public ReserveVO selectReserve(int rno);
+	
+//	public List<ReserveVO> reserveList(int mno);
+}

@@ -40,7 +40,7 @@ public class MemberController {
 			log.info("가입완료");
 		}
 		
-		return "redirect:/board/list";
+		return "redirect:/";
 	}
 	@PostMapping("/idCheck")
 	public ResponseEntity<String> idCheck(@RequestParam("mid") String mid) {
