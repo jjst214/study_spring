@@ -1,22 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../includes/header.jsp" %>
-<style>
-	.bigPictureWrapper{
-		position:absolute;
-		top:0;
-		left:0;
-		width:100%;
-		height:100vh;
-		background:rgba(0,0,0,0.5);
-		display:none;
-		justify-content:center;
-		align-items:center;
-		color:#fff;
-	}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 		<!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -24,21 +9,15 @@
             <div id="content">
                 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
-				</div>
-				<h2>상세조회 페이지</h2>
-				<p><c:out value="${board.bno }"></c:out></p>
-				<p><c:out value="${board.title }"></c:out></p>
+                <div class="container">
+				
+				<h2 style="border-bottom:2px solid black;">상세조회 페이지</h2>
+				<strong><c:out value="${board.title }"></c:out></strong>
+				<p style="border-bottom:1px solid #ccc;"><c:out value="${board.writer }"></c:out>&emsp;|&emsp;<fmt:formatDate value="${board.updatedate }" pattern="yyyy-MM-dd HH:ss"/></p>
+				<p id="content_image"></p>
 				<p><c:out value="${board.content }"></c:out></p>
-				<p><c:out value="${board.writer }"></c:out></p>
 				<p>
-					<button onclick="location.href='/board/list?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
+					<button onclick="location.href='/board/review?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
 					<!-- 변수등록 -->
 					<sec:authentication property="principal" var="pinfo"/>
 					<sec:authorize access="isAuthenticated()">
@@ -69,6 +48,7 @@
 					</div>
 				</div>
 				<!-- 첨부파일 이미지 영역 끝 -->
+				</div>
 			</div>
 		</div>
 		<div class="bigPictureWrapper">
@@ -86,14 +66,18 @@
 						console.log(arr);
 						//이미지 나타내기
 						let str = "";
+						let view = "";
 						$(arr).each(function(i, attach){
 							let fileCallpath = encodeURIComponent(attach.uploadPath+"/s_"+attach.uuid+"_"+attach.fileName);
+							let fileCallpath2 = encodeURIComponent(attach.uploadPath+"/"+attach.uuid+"_"+attach.fileName);
 							str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"'";
 							str += "data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'>";
 							str += "<div><img src='/display?fileName="+fileCallpath+"'/>";
 							str += "</div></li>";
+							view += "<img src='/display?fileName="+fileCallpath2+"'/>";
 						})
 						$(".uploadResult ul").html(str);
+						$("#content_image").html(view);
 					})//end getJSON
 			})();
 			//li를 클릭하면 bigPictureWrapper나타나게 하고
@@ -114,4 +98,5 @@
 			})
 		})
 		</script>
+
 <%@ include file="../includes/footer.jsp" %>

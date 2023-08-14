@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* header.jsp */
+#logoutBtn{
+	border:none;
+	background-color:transparent;
+	outline:none;
+}
+/* review.jsp */
+.review-write-btn{
+	border:1px solid #ccc;
+	background:#ccc;
+	color:#fff;
+	padding: 5px 10px;
+	float:right;
+}
+.review-write-btn:hover {	
+	transition:0.2s;
+	color:black;
+	border:1px solid #ccc;
+	background:#fff;
+}
+/* modify.jsp */
+.modify-content{
+	margin-top:30px;
+	width:1200px;
+	height:600px;
+	resize: none;
+	outline:none;
+}

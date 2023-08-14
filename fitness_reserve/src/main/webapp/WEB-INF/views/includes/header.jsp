@@ -34,6 +34,7 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/main.css" rel="stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
@@ -51,7 +52,7 @@
     <div class="container-fluid bg-primary text-white d-none d-lg-flex">
         <div class="container py-3">
             <div class="d-flex align-items-center">
-                <a href="index.html">
+                <a href="/">
                     <h2 class="text-white fw-bold m-0">Green GYM</h2>
                 </a>
                 <div class="ms-auto d-flex align-items-center">
@@ -81,26 +82,30 @@
                     data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="collapse navbar-collapse" id="navbarCollapse navMenu">
                     <div class="navbar-nav">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="project.html" class="nav-item nav-link">Projects</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="quote.html" class="dropdown-item">Quotation</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="/" class="nav-item nav-link active">홈</a>
+                        <a href="about.html" class="nav-item nav-link">짐 투어</a>
+                        <a href="service.html" class="nav-item nav-link">이용요금 및 예약</a>
+                        <a href="project.html" class="nav-item nav-link">이용안내</a>
+                        <a href="/board/review" class="nav-item nav-link">후기게시판</a>
+                        <a href="project.html" class="nav-item nav-link">위치 및 연락처</a>
+                        
+                        
+                        
                     </div>
-                    <div class="ms-auto d-none d-lg-block">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-3">Get A Quote</a>
+                    <div class="navbar-nav" id="login">
+                        <sec:authorize access="isAnonymous()">
+                        	<a href="/customLogin" class="nav-item nav-link">로그인</a>
+                        	<a href="/member/join" class="nav-item nav-link">회원가입</a>
+                        </sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
+	                        <form action="/customLogout" method="post">
+								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+								<button id="logoutBtn">로그아웃</button>
+							</form>
+                        	
+                        </sec:authorize>
                     </div>
                 </div>
             </nav>
