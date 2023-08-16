@@ -27,3 +27,11 @@
 	resize: none;
 	outline:none;
 }
+modify-btn{
+	text-align: right;
+}
+/* reservation.jsp */
+.title{
+	text-align:center;
+	padding:40px 0 50px 0;
+}

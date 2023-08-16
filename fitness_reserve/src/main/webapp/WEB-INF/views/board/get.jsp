@@ -13,7 +13,7 @@
 				
 				<h2 style="border-bottom:2px solid black;">상세조회 페이지</h2>
 				<strong><c:out value="${board.title }"></c:out></strong>
-				<p style="border-bottom:1px solid #ccc;"><c:out value="${board.writer }"></c:out>&emsp;|&emsp;<fmt:formatDate value="${board.updatedate }" pattern="yyyy-MM-dd HH:ss"/></p>
+				<p style="border-bottom:1px solid #ccc;"><c:out value="${board.writer }"></c:out>&emsp;|&emsp;<fmt:formatDate value="${board.updatedate }" pattern="yyyy-MM-dd HH:mm"/></p>
 				<p id="content_image"></p>
 				<p><c:out value="${board.content }"></c:out></p>
 				<p>

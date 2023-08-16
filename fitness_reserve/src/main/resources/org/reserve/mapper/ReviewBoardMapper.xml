@@ -43,7 +43,7 @@
 		delete from review_board where bno = #{bno}
 	</delete>
 	<update id="update">
-		update review_board set title=#{title}, content=#{content} where bno=#{bno}
+		update review_board set title=#{title}, content=#{content}, updatedate=sysdate where bno=#{bno}
 	</update>
 	<select id="getListWithPaging" resultType="org.reserve.domain.ReviewBoardVO">
 		select * from (select Tb.*, rownum rNum from(select * from review_board
