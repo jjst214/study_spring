@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../includes/header.jsp" %>
-		<!-- Content Wrapper -->
+
+	<!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container">
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
@@ -29,37 +28,39 @@
                           </div>
                           <div class="col-sm-6">
                               <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                  placeholder="글쓴이" value='<sec:authentication property="principal.username"/>' name="writer" required/>
+                                  placeholder="글쓴이" value='<sec:authentication property="principal.username"/>' readonly name="writer" required/>
                           </div>
                           <div class="col-sm-12">
 								<textarea rows="" cols="" class="form-control form-control-user"
 								 id="exampleLastName" name="content" placeholder="내용" required></textarea>
                           </div>
+                          <!-- 새로 추가되는 부분 -->
+						   <div class="row">
+						      <div class="col-lg-12">
+						         <div class="panel panel-default">
+						            <div class="panel-heading">파일 첨부</div>
+						            <div class="panel-body">
+						               <div class="uploadDiv">
+						                  <input type="file" name="uploadFile" multiple />
+						               </div>
+						               <div class="uploadResult">
+						                  <ul>
+						                     
+						                  </ul>
+						               </div>
+						            </div>
+						         </div>
+						      </div>
+						   </div>
                           <div>
                           		<button type="submit" class="btn btn-primary btn-user" >등록</button>
 								<button type="reset" class="btn btn-primary btn-user" >취소</button>
                           </div>
                       </div>
                   	</form>
+                   
 				</div>
-				<!-- 새로 추가되는 부분 -->
-			   <div class="row">
-			      <div class="col-lg-12">
-			         <div class="panel panel-default">
-			            <div class="panel-heading">파일 첨부</div>
-			            <div class="panel-body">
-			               <div class="uploadDiv">
-			                  <input type="file" name="uploadFile" multiple />
-			               </div>
-			               <div class="uploadResult">
-			                  <ul>
-			                     
-			                  </ul>
-			               </div>
-			            </div>
-			         </div>
-			      </div>
-			   </div>
+				
 			</div>
 		</div>
 		<script>

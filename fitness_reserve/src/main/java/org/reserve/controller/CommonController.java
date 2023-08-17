@@ -1,5 +1,7 @@
 package org.reserve.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.reserve.service.MemberService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,13 @@ public class CommonController {
 	}
 	
 	@GetMapping("/customLogout")
-	public void logoutGet() {
+	public String logoutGet(HttpServletRequest request) {
 		log.info("로그아웃");
+		if(request.getHeader("Referer") != null) {
+			log.info(request.getHeader("Referer"));
+			return "redirect:" + request.getHeader("Referer");
+		}else {
+			return "redirect:/";
+		}
 	}
 }

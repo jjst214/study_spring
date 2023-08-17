@@ -13,4 +13,7 @@
 	 	insert into reserve(rno, fno, rdate, rstart, rend, mno)
 	 	 values(seq_rno.nextval, #{fno}, sysdate, #{rstart}, #{rend}, #{mno})
 	 </insert>
+	 <select id="allReserveList" resultType="org.reserve.domain.ReserveVO">
+	 	select * from reserve where rdate = #{rdate} and fno = #{fno}
+	 </select>
 </mapper>

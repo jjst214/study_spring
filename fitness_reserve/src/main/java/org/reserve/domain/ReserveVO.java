@@ -9,7 +9,7 @@ public class ReserveVO {
 	private int rno;
 	private int fno;
 	private boolean rstatus;
-	private Date rdate;
+	private String rdate;
 	private String rstart;
 	private String rend;
 	private int mno;

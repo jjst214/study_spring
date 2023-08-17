@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="includes/header.jsp" %>
-
+<title>GREEN GYM</title>
 
     <!-- Carousel Start -->
     <div class="container-fluid px-0 mb-5">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="/resources/img/carousel-1.jpeg" alt="Image">
+                    <img class="w-100" src="/resources/img/carousel-2.jpg" alt="Image" style="height:100vh;">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -16,8 +16,7 @@
                                     <p class="fs-4 text-white animated slideInRight">Welcome to
                                         <strong>GREEN GYM</strong>
                                     </p>
-                                    <h1 class="display-1 text-white mb-4 animated slideInRight">Unlock Your Business
-                                        Growth</h1>
+                                    <h1 class="display-4 text-white animated slideInRight">프라이빗한 공간에서 <br>최고의 운동을 경험하다</h1>
                                     <a href="/reserve/reservation"
                                         class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight">지금 예약하기</a>
                                 </div>
@@ -26,15 +25,14 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/resources/img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="/resources/img/carousel-1.jpeg" alt="Image" style="height:100vh;">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-end">
                                 <div class="col-lg-7 text-end">
-                                    <p class="fs-4 text-white animated slideInLeft">Welcome to <strong>GrowMark</strong>
+                                    <p class="fs-4 text-white animated slideInLeft">Welcome to <strong>GREEN GYM</strong>
                                     </p>
-                                    <h1 class="display-1 text-white mb-5 animated slideInLeft">Ready to Grow Your
-                                        Business</h1>
+                                    <h1 class="display-4 text-white animated slideInLeft">프라이빗한 공간에서 <br>최고의 운동을 경험하다</h1>
                                     <a href="/reserve/reservation"
                                         class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">지금 예약하기</a>
                                 </div>
@@ -54,52 +52,6 @@
         </div>
     </div>
     <!-- Carousel End -->
-
-
-    <!-- Features Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-0 feature-row">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="feature-item border h-100 p-5">
-                        <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <img class="img-fluid" src="img/icon/icon-1.png" alt="Icon">
-                        </div>
-                        <h5 class="mb-3">Award Winning</h5>
-                        <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="feature-item border h-100 p-5">
-                        <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <img class="img-fluid" src="img/icon/icon-2.png" alt="Icon">
-                        </div>
-                        <h5 class="mb-3">Professional Staff</h5>
-                        <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="feature-item border h-100 p-5">
-                        <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <img class="img-fluid" src="img/icon/icon-3.png" alt="Icon">
-                        </div>
-                        <h5 class="mb-3">Fair Prices</h5>
-                        <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <div class="feature-item border h-100 p-5">
-                        <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                            <img class="img-fluid" src="img/icon/icon-4.png" alt="Icon">
-                        </div>
-                        <h5 class="mb-3">24/7 Support</h5>
-                        <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Features End -->
 
 
     <!-- About Start -->
@@ -420,114 +372,5 @@
         </div>
     </div>
     <!-- Quote Start -->
-
-
-    <!-- Team Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-medium text-primary">Our Team</p>
-                <h1 class="display-5 mb-5">Our Expert People Ready to Help You</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item rounded overflow-hidden pb-4">
-                        <img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
-                        <h5>Alex Robin</h5>
-                        <span class="text-primary">Founder & CEO</span>
-                        <ul class="team-social">
-                            <li><a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-linkedin-in"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item rounded overflow-hidden pb-4">
-                        <img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
-                        <h5>Adam Crew</h5>
-                        <span class="text-primary">Co Founder</span>
-                        <ul class="team-social">
-                            <li><a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-linkedin-in"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item rounded overflow-hidden pb-4">
-                        <img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
-                        <h5>Boris Johnson</h5>
-                        <span class="text-primary">Executive Manager</span>
-                        <ul class="team-social">
-                            <li><a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-linkedin-in"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item rounded overflow-hidden pb-4">
-                        <img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
-                        <h5>Robert Jordan</h5>
-                        <span class="text-primary">Digital Marketer</span>
-                        <ul class="team-social">
-                            <li><a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a class="btn btn-square" href=""><i class="fab fa-linkedin-in"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
-
-
-    <!-- Testimonial Start -->
-    <div class="container-xxl pt-5">
-        <div class="container">
-            <div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s"
-                style="max-width: 500px;">
-                <p class="fs-5 fw-medium text-primary">Testimonial</p>
-                <h1 class="display-5 mb-5">What Clients Say About Our Services!</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-1.jpg" alt="">
-                    <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-                        sit, sed stet lorem sit clita duo justo</p>
-                    <h5>Client Name</h5>
-                    <span class="text-primary">Profession</span>
-                </div>
-                <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-2.jpg" alt="">
-                    <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-                        sit, sed stet lorem sit clita duo justo</p>
-                    <h5>Client Name</h5>
-                    <span class="text-primary">Profession</span>
-                </div>
-                <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-3.jpg" alt="">
-                    <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-                        sit, sed stet lorem sit clita duo justo</p>
-                    <h5>Client Name</h5>
-                    <span class="text-primary">Profession</span>
-                </div>
-                <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-4.jpg" alt="">
-                    <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-                        sit, sed stet lorem sit clita duo justo</p>
-                    <h5>Client Name</h5>
-                    <span class="text-primary">Profession</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
 
 <%@ include file="includes/footer.jsp" %>
