@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.reserve.domain.PaymentVO;
 import org.reserve.domain.ReserveVO;
 import org.reserve.service.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -32,27 +34,21 @@ public class ReserveController {
 	
 	@GetMapping("/reservation")
 	@PreAuthorize("isAuthenticated()")
-	public void doReserve(Model model) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar cal = Calendar.getInstance();
+	public void doReserve()  {
 		
-		cal.add(Calendar.DATE, 1);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
+	}
+	@PostMapping("/reservation")
+	@PreAuthorize("isAuthenticated()")
+	public String doReserve(List<ReserveVO> rvo, List<PaymentVO> pvo) {
 		
-		String date = sdf.format(cal.getTime());
-		Date convertDate = sdf.parse(date);
-		log.info("==================================");
-		log.info(convertDate);
-		log.info("==================================");
-		model.addAttribute("resultlist", service.accessReserve(convertDate));
+		return "";
 	}
 	
 	@PostMapping("/selectDate")
-	public ResponseEntity<List<ReserveVO>> reserveList(Date selectDate){
-		List<ReserveVO> list = service.accessReserve(selectDate);
-		
-		return new ResponseEntity<List<ReserveVO>>(list, HttpStatus.OK);
+	@ResponseBody
+	public ResponseEntity<List<ReserveVO>> reserveList(Date selectDate, int fno){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = sdf.format(selectDate);
+		return new ResponseEntity<>(service.accessReserve(strDate, fno), HttpStatus.OK);
 	}
 }

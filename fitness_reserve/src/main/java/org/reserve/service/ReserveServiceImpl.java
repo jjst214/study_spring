@@ -1,6 +1,6 @@
 package org.reserve.service;
 
-import java.util.Date;
+
 import java.util.List;
 
 import org.reserve.domain.PaymentVO;
@@ -25,7 +25,7 @@ public class ReserveServiceImpl implements ReserveService {
 	
 	@Override
 	public void addReserve(List<ReserveVO> rvo, List<PaymentVO> pvo) {
-		if(rvo != null && pvo != null) {
+		if(rvo != null) {
 			for(int i=0; i<rvo.size(); i++) {
 				rmapper.insertReserve(rvo.get(i));
 				pmapper.insertPayment(pvo.get(i));
@@ -35,9 +35,9 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<ReserveVO> accessReserve(Date rdate) {
-		List<ReserveVO> lists = rmapper.allReserveList(rdate);
-		return lists;
+	public List<ReserveVO> accessReserve(String rdate, int fno) {
+		List<ReserveVO> list = rmapper.allReserveList(rdate, fno);
+		return list;
 	}
 	
 }

@@ -11,4 +11,5 @@ public class PaymentVO {
 	private String pkind;
 	private String pbank;
 	private Date pdate;
+	private int totalPurchase;
 }
