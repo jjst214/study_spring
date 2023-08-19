@@ -1,6 +1,7 @@
 package org.reserve.domain;
 
-import java.util.Date;
+
+import java.util.List;
 
 import lombok.Data;
 
@@ -10,6 +11,5 @@ public class PaymentVO {
 	private int rno;
 	private String pkind;
 	private String pbank;
-	private Date pdate;
-	private int totalPurchase;
+	private String pdate;
 }

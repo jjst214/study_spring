@@ -1,6 +1,7 @@
 package org.reserve.domain;
 
-import java.util.Date;
+
+import java.util.List;
 
 import lombok.Data;
 
@@ -13,4 +14,6 @@ public class ReserveVO {
 	private String rstart;
 	private String rend;
 	private int mno;
+	
+	private List<ReserveVO> rvoList;
 }

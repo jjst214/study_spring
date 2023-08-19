@@ -8,5 +8,5 @@ import org.reserve.domain.ReserveVO;
 public interface ReserveService {
 	public void addReserve(List<ReserveVO> rvo, List<PaymentVO> pvo);
 	
-	public List<ReserveVO> accessReserve(String rdate, int fno);
+	public List<ReserveVO> accessReserve(ReserveVO rvo);
 }

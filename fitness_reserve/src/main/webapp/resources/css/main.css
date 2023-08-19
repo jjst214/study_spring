@@ -100,3 +100,8 @@ modify-btn{
 	top:-18px;
 	left:-20px;
 }
+/* reservation-payment.jsp */
+.credit{
+	padding:20px 0;
+	display:none;
+}

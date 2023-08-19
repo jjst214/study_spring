@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.Setter;
@@ -39,16 +40,68 @@ public class ReserveController {
 	}
 	@PostMapping("/reservation")
 	@PreAuthorize("isAuthenticated()")
-	public String doReserve(List<ReserveVO> rvo, List<PaymentVO> pvo) {
-		
-		return "";
+	public String doReserve(ReserveVO rvo, Model model) throws ParseException {
+		List<ReserveVO> rvos = new ArrayList<ReserveVO>();
+		String[] r = rvo.getRstart().strip().split(",");
+		for(int i=0; i<r.length; i++) {
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+			Date date = sdf.parse(r[i].strip());
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.HOUR_OF_DAY, 1);
+			date = cal.getTime();
+			String rend = sdf.format(date);
+			
+			ReserveVO re = new ReserveVO();
+			re.setMno(rvo.getMno());
+			re.setFno(rvo.getFno());
+			re.setRdate(rvo.getRdate());
+			re.setRstart(r[i]);
+			re.setRend(rend);
+			rvos.add(re);
+		}
+		model.addAttribute("rvo", rvos);
+		return "/reserve/reservation-payment";
 	}
 	
 	@PostMapping("/selectDate")
 	@ResponseBody
-	public ResponseEntity<List<ReserveVO>> reserveList(Date selectDate, int fno){
+	public ResponseEntity<List<ReserveVO>> reserveList(Date rdate, int fno){
+		ReserveVO rvo = new ReserveVO();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String strDate = sdf.format(selectDate);
-		return new ResponseEntity<>(service.accessReserve(strDate, fno), HttpStatus.OK);
+		String strDate = sdf.format(rdate);
+		rvo.setRdate(strDate);
+		rvo.setFno(fno);
+		return new ResponseEntity<>(service.accessReserve(rvo), HttpStatus.OK);
+	}
+	
+	@GetMapping("/reservation-payment")
+	@PreAuthorize("isAuthenticated()")
+	public void doPayment() {
+		
+	}
+	@PostMapping("/reservation-payment")
+	@PreAuthorize("isAuthenticated()")
+	public String doPayment(PaymentVO pvo, ReserveVO rvo) {
+		List<PaymentVO> pvos = new ArrayList<PaymentVO>();
+		List<ReserveVO> rvos = new ArrayList<ReserveVO>();
+		
+		for(int i=0; i<rvo.getRvoList().size(); i++) {
+			ReserveVO r = new ReserveVO();
+			PaymentVO p = new PaymentVO();
+			r.setFno(rvo.getRvoList().get(i).getFno());
+			r.setMno(rvo.getRvoList().get(i).getMno());
+			r.setRdate(rvo.getRvoList().get(i).getRdate());
+			r.setRstart(rvo.getRvoList().get(i).getRstart());
+			r.setRend(rvo.getRvoList().get(i).getRend());
+			p.setPkind(pvo.getPkind());
+			p.setPdate(pvo.getPdate());
+			p.setPbank(pvo.getPbank());
+			rvos.add(r);
+			pvos.add(p);
+		}
+		service.addReserve(rvos, pvos);
+		
+		return "redirect: /";
 	}
 }

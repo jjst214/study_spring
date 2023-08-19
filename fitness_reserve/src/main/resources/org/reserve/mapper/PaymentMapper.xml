@@ -3,6 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.reserve.mapper.PaymentMapper">
 	<insert id="insertPayment">
-		insert into payment(pno, rno, pkind, pbank) values(seq_pno.nextval, #{rno}, #{pkind}, #{pbank})
+		insert into payment(pno, rno, pkind, pbank) values(seq_pno.nextval, seq_rno.currval, #{pkind}, #{pbank})
 	</insert>
 </mapper>

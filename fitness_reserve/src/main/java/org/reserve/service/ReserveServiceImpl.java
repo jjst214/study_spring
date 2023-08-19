@@ -35,8 +35,8 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<ReserveVO> accessReserve(String rdate, int fno) {
-		List<ReserveVO> list = rmapper.allReserveList(rdate, fno);
+	public List<ReserveVO> accessReserve(ReserveVO rvo) {
+		List<ReserveVO> list = rmapper.allReserveList(rvo);
 		return list;
 	}
 	

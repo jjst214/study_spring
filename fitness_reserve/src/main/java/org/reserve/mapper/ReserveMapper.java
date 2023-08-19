@@ -10,5 +10,5 @@ public interface ReserveMapper {
 	
 //	public ReserveVO selectReserve(int rno);
 	
-	public List<ReserveVO> allReserveList(String rdate, int fno);
+	public List<ReserveVO> allReserveList(ReserveVO rvo);
 }

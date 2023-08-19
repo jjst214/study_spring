@@ -6,12 +6,13 @@
 <div class="container">
 	<h2 class="title">RESERVATION</h2>
 	<div>
-		<form action="/reserve/reservation" method="post">
+		<form action="/reserve/reservation" method="post" id="reserveForm">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+		<input type="hidden" name="mno" value="<sec:authentication property="principal.member.mno"/>" />
 		<div class="select-Room">
 			<h2 class="subtitle">헬스 룸</h2>
 			<select name="fno" id="fno">
-				<option value="none">선택하세요</option>
+				<option value="none" selected>선택하세요</option>
 				<option value="1">그린 짐 스탠다드 룸(hour +9,000)</option>
 				<option value="2">그린 짐 스탠다드 룸(hour +9,000)</option>
 				<option value="3">그린 짐 스탠다드 룸(hour +9,000)</option>
@@ -106,7 +107,7 @@
 			</div>
 		</div>
 		<div>
-		
+			<input type="submit" value="다음"/>
 		</div>
 		</form>
 	</div>
@@ -146,19 +147,18 @@
 	});
 	$("input[name='rdate']").change(function(){
 		let accessDate = new Date();
-		let selectDate = new Date($(this).val());
+		let rdate = new Date($(this).val());
 		let fno = $("#fno").val();
 		let form = $('.reserveForm');
-		if(selectDate<accessDate){
+		if(rdate<accessDate){
 			alert('해당 날짜는 예약이 불가능합니다.');
 			$(this).val(prevDate);
 			//서브밋 disabled시키기
 		}else{
-			console.log("ajax작동");
 			$.ajax({
 				url: '/reserve/selectDate',
 				data: {
-					'selectDate': selectDate,
+					'rdate': rdate,
 					'fno': fno
 					},
 				type: 'POST',
@@ -170,6 +170,38 @@
 					reserveResult(result);
 				}
 			});
+			console.log(rdate);
+			console.log(fno);
+			console.log("ajax작동");
+		}
+	});
+	$("select[name='fno']").change(function(){
+		let rdate = new Date($('#rdate').val());
+		let fno = $("#fno").val();
+		let form = $('.reserveForm');
+		if(fno == 'none'){
+			alert('룸을 선택해주세요');
+			return;
+			//서브밋 disabled시키기
+		}else{
+			$.ajax({
+				url: '/reserve/selectDate',
+				data: {
+					'rdate': rdate,
+					'fno': fno
+					},
+				type: 'POST',
+				beforeSend:function(xhr){
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				},
+				dataType: 'json',
+				success: function(result){
+					reserveResult(result);
+				}
+			});
+			console.log(rdate);
+			console.log(fno);
+			console.log("ajax작동");
 		}
 	});
 	function reserveResult(reserveList){
@@ -197,5 +229,18 @@
 			});
 		}
 	}
+	//submit 눌렀을때
+	$('input[type="submit"]').on('click', function(e){
+		e.preventDefault();
+		let form = $('#reserveForm');
+		let rstart = [];
+		$('.on').each(function(i){
+			rstart.push($(this).text());
+		});
+		
+		let str = "";
+		str += "<input type='hidden' name='rstart' value='"+rstart+"'/>";
+		form.append(str).submit();
+	});
 </script>
 <%@ include file="../includes/footer.jsp" %>

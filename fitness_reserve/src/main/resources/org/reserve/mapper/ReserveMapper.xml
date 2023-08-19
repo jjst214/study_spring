@@ -2,16 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.reserve.mapper.ReserveMapper">
-	<!-- 
 	<resultMap type="org.reserve.domain.ReserveVO" id=""></resultMap>
 	<select id="selectReserve" resultType="org.reserve.domain.ReserveVO">
 		select f.fno, finfo, ftype, pprice from
 		 fitness f left outer join price price on f.fno = price.fno where f.fno = 6;
 	</select>
-	 -->
 	 <insert id="insertReserve">
 	 	insert into reserve(rno, fno, rdate, rstart, rend, mno)
-	 	 values(seq_rno.nextval, #{fno}, sysdate, #{rstart}, #{rend}, #{mno})
+	 	 values(seq_rno.nextval, #{fno}, #{rdate}, #{rstart}, #{rend}, #{mno})
 	 </insert>
 	 <select id="allReserveList" resultType="org.reserve.domain.ReserveVO">
 	 	select * from reserve where rdate = #{rdate} and fno = #{fno}
