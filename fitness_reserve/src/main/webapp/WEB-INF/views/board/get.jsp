@@ -16,14 +16,16 @@
 				<p style="border-bottom:1px solid #ccc;"><c:out value="${board.writer }"></c:out>&emsp;|&emsp;<fmt:formatDate value="${board.updatedate }" pattern="yyyy-MM-dd HH:mm"/></p>
 				<p id="content_image"></p>
 				<p><c:out value="${board.content }"></c:out></p>
-				<p>
+				<div class="getbtns">
 					<button onclick="location.href='/board/review?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
 					<!-- 변수등록 -->
 					<sec:authentication property="principal" var="pinfo"/>
 					<sec:authorize access="isAuthenticated()">
-					<!-- 로그인한 사용자랑 글쓴이가 같아야함 -->
-					<c:if test="${pinfo.username eq board.writer }">
-					<button onclick="location.href='/board/modify?bno=${board.bno}&pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">수정</button>
+					<!-- 로그인한 사용자랑 글쓴이가 같아야 수정, 삭제보임 -->
+					<c:if test="${pinfo.username eq board.writer}">
+					<button class="modify-btn" onclick="location.href='/board/modify?bno=${board.bno}&pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">수정</button>
+					</c:if>
+					<c:if test="${pinfo.username eq board.writer or pinfo.authorities eq '[ROLE_MEMBER]' or pinfo.authorities eq '[ROLE_ADMIN]'}">
 					<form method="post" action="/board/remove">
 						<input type="hidden" value="${board.bno }" name="bno"/>
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
@@ -31,7 +33,7 @@
 					</form>
 					</c:if>
 					</sec:authorize>
-				</p>
+				</div>
 				<!-- 첨부파일 이미지 영역 -->
 				<div class="row">
 					<div class="col-lg-12">
@@ -78,7 +80,7 @@
 						})
 						$(".uploadResult ul").html(str);
 						$("#content_image").html(view);
-					})//end getJSON
+					});//end getJSON
 			})();
 			//li를 클릭하면 bigPictureWrapper나타나게 하고
 			//.bigPicture의 html 내용에 이미지가 나타나도록 지정
@@ -87,7 +89,7 @@
 				let liObj = $(this);
 				let path = encodeURIComponent(liObj.data("path")+"/"+liObj.data("uuid")+"_"+liObj.data("filename"));
 				showImage(path.replace(new RegExp(/\\/g),"/"));
-			})
+			});
 			function showImage(fileCallPath){
 				alert(fileCallPath);
 				$(".bigPictureWrapper").css("display","flex");
@@ -95,8 +97,8 @@
 			}
 			$(".bigPictureWrapper").on("click","span", function(e){
 				$(".bigPictureWrapper").css("display","none");
-			})
-		})
+			});
+		});
 		</script>
 
 <%@ include file="../includes/footer.jsp" %>

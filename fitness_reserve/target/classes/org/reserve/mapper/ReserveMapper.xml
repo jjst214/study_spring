@@ -2,10 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.reserve.mapper.ReserveMapper">
-	<resultMap type="org.reserve.domain.ReserveVO" id=""></resultMap>
-	<select id="selectReserve" resultType="org.reserve.domain.ReserveVO">
-		select f.fno, finfo, ftype, pprice from
-		 fitness f left outer join price price on f.fno = price.fno where f.fno = 6;
+	<select id="getInfo" resultType="org.reserve.domain.ReserveVO">
+		select fno, finfo from fitness where fno = #{fno}
 	</select>
 	 <insert id="insertReserve">
 	 	insert into reserve(rno, fno, rdate, rstart, rend, mno)

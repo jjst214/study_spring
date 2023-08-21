@@ -68,11 +68,21 @@ public class ReserveController {
 	@ResponseBody
 	public ResponseEntity<List<ReserveVO>> reserveList(Date rdate, int fno){
 		ReserveVO rvo = new ReserveVO();
+		ReserveVO info = service.getInfo(fno);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = sdf.format(rdate);
 		rvo.setRdate(strDate);
 		rvo.setFno(fno);
+		rvo.setFinfo(info.getFinfo());
+		log.info(info.getFinfo());
 		return new ResponseEntity<>(service.accessReserve(rvo), HttpStatus.OK);
+	}
+	
+	@PostMapping("/selectRoom")
+	@ResponseBody
+	public ResponseEntity<ReserveVO> getRoomInfo(int fno){
+		ReserveVO info = service.getInfo(fno);
+		return new ResponseEntity<>(info, HttpStatus.OK);
 	}
 	
 	@GetMapping("/reservation-payment")

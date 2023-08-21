@@ -39,5 +39,11 @@ public class ReserveServiceImpl implements ReserveService {
 		List<ReserveVO> list = rmapper.allReserveList(rvo);
 		return list;
 	}
+
+	@Override
+	public ReserveVO getInfo(int fno) {
+		ReserveVO rvo = rmapper.getInfo(fno);
+		return rvo;
+	}
 	
 }

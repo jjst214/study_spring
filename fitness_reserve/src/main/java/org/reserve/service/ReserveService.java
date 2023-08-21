@@ -6,6 +6,8 @@ import org.reserve.domain.PaymentVO;
 import org.reserve.domain.ReserveVO;
 
 public interface ReserveService {
+	public ReserveVO getInfo(int fno);
+	
 	public void addReserve(List<ReserveVO> rvo, List<PaymentVO> pvo);
 	
 	public List<ReserveVO> accessReserve(ReserveVO rvo);

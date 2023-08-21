@@ -106,8 +106,14 @@
 				</ul>
 			</div>
 		</div>
+		<div class="reserve-select">
+			<h2 class="subtitle">시설요약</h2>
+			<div class="imgDiv"></div>
+			<p class="info"></p>
+		</div>
+		
 		<div>
-			<input type="submit" value="다음"/>
+			<input class="reserve-submit" type="submit" value="다음"/>
 		</div>
 		</form>
 	</div>
@@ -129,6 +135,8 @@
 				$(this).toggleClass('on');
 			}
 		});
+		
+		
 	});
 	//security token
 	let csrfHeaderName = "${_csrf.headerName}";
@@ -153,7 +161,6 @@
 		if(rdate<accessDate){
 			alert('해당 날짜는 예약이 불가능합니다.');
 			$(this).val(prevDate);
-			//서브밋 disabled시키기
 		}else{
 			$.ajax({
 				url: '/reserve/selectDate',
@@ -176,13 +183,20 @@
 		}
 	});
 	$("select[name='fno']").change(function(){
+		if($(this).val() == 'none'){
+			$('.reserve-select').css('display', 'none');
+		}
+		let date = $("input[name='rdate']");
 		let rdate = new Date($('#rdate').val());
 		let fno = $("#fno").val();
 		let form = $('.reserveForm');
+		let times = $(".time_txt");
 		if(fno == 'none'){
-			alert('룸을 선택해주세요');
+			for(let i=0; i<times.length; i++){
+	    		times[i].parentElement.classList.add('none');
+	    		times[i].parentElement.classList.remove('on');
+	    	}
 			return;
-			//서브밋 disabled시키기
 		}else{
 			$.ajax({
 				url: '/reserve/selectDate',
@@ -199,9 +213,22 @@
 					reserveResult(result);
 				}
 			});
-			console.log(rdate);
-			console.log(fno);
-			console.log("ajax작동");
+			$.ajax({
+				url: '/reserve/selectRoom',
+				data:{'fno':fno},
+				type: 'POST',
+				beforeSend:function(xhr){
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				},
+				dataType: 'json',
+				success: function(result){
+					$('.reserve-select').css('display', 'block');
+					$('.imgDiv').empty();
+					let str = result.fno > 5 ? "<img src='../resources/img/premium.jpeg'/>" : "<img src='../resources/img/standard.jpeg'/>";
+					$('.imgDiv').prepend(str);
+					$('.info').text(result.finfo);
+				}
+			});
 		}
 	});
 	function reserveResult(reserveList){
@@ -222,7 +249,7 @@
 			$(reserveList).each(function(i, obj){
 				console.log("예약 시작시간 : " +obj.rstart);
 		    	for(let i=0; i<times.length; i++){
-			    	if(obj.rstart == times[i].innerText){
+			    	if(obj.rstart.trim() == times[i].innerText.trim()){
 			    		times[i].parentElement.classList.add('none');
 					}
 			    }
@@ -234,13 +261,20 @@
 		e.preventDefault();
 		let form = $('#reserveForm');
 		let rstart = [];
-		$('.on').each(function(i){
-			rstart.push($(this).text());
-		});
+		if($('.on').length == 0 || $('.on') == null){
+			alert('선택 옵션을 확인해주세요');
+			return;
+		}else{
+			$('.on').each(function(i){
+				rstart.push($(this).text());
+			});	
+		}
+		
 		
 		let str = "";
 		str += "<input type='hidden' name='rstart' value='"+rstart+"'/>";
 		form.append(str).submit();
 	});
+	
 </script>
 <%@ include file="../includes/footer.jsp" %>

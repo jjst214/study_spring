@@ -86,11 +86,11 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse navMenu">
                     <div class="navbar-nav">
                         <a href="/" class="nav-item nav-link active">홈</a>
-                        <a href="about.html" class="nav-item nav-link">짐 투어</a>
+                        <a href="/About" class="nav-item nav-link">짐 투어</a>
                         <a href="service.html" class="nav-item nav-link">이용요금 및 예약</a>
                         <a href="project.html" class="nav-item nav-link">이용안내</a>
                         <a href="/board/review" class="nav-item nav-link">후기게시판</a>
-                        <a href="project.html" class="nav-item nav-link">위치 및 연락처</a>
+                        <a href="/Contact" class="nav-item nav-link">위치 및 연락처</a>
                         
                         
                         
@@ -103,7 +103,7 @@
                         <sec:authorize access="isAuthenticated()">
 	                        <form action="/customLogout" method="post">
 								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-								<button id="logoutBtn">로그아웃</button>
+								<label><sec:authentication property="principal.username"/>님&nbsp;</label><button id="logoutBtn">로그아웃</button>
 							</form>
                         	
                         </sec:authorize>

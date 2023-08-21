@@ -15,5 +15,6 @@ public class ReserveVO {
 	private String rend;
 	private int mno;
 	
+	private String finfo;
 	private List<ReserveVO> rvoList;
 }

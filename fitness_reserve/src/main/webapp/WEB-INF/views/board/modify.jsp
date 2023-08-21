@@ -19,8 +19,8 @@
 				<input type="hidden" name="type" value="${cri.type }"/>
 				<input type="hidden" name="keyword" value="${cri.keyword }"/>
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-				<input type="text" value="${board.title }" name="title" required/>
-				<input type="text" style="border-bottom:1px solid #ccc;" readonly value="${board.writer }" name="writer"/>
+				<input type="text" class="form-control" value="${board.title }" name="title" required/>
+				<input type="text" class="form-control" style="border-bottom:1px solid #ccc;" readonly value="${board.writer }" name="writer"/>
 				<textarea class="modify-content" name="content">${board.content }</textarea>
 				<p id="modify-btn">
 					<button onclick="location.href='/board/review?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
