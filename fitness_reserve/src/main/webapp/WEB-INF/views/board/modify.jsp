@@ -19,34 +19,45 @@
 				<input type="hidden" name="type" value="${cri.type }"/>
 				<input type="hidden" name="keyword" value="${cri.keyword }"/>
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-				<input type="text" class="form-control" value="${board.title }" name="title" required/>
-				<input type="text" class="form-control" style="border-bottom:1px solid #ccc;" readonly value="${board.writer }" name="writer"/>
-				<textarea class="modify-content" name="content">${board.content }</textarea>
-				<p id="modify-btn">
-					<button onclick="location.href='/board/review?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
-					<button type="submit" >등록</button>
-					<button type="reset" >취소</button>
-					
-				</p>
-				<!-- 첨부파일 이미지 영역 -->
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								파일들
-							</div>
-							<div class="panel-body">
-								<div class="uploadDiv">
-				                  	<input type="file" name="uploadFile" multiple />
-				                </div>
-								<div class="uploadResult">
-									<ul></ul>
+				<div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0 title-div">
+                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                            placeholder="제목" name="title" value="${board.title }" required>
+                    </div>
+                    <div class="col-sm-6 writer-div">
+                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                            placeholder="글쓴이" value="${board.writer }" readonly name="writer" required/>
+                    </div>
+                    <div class="col-sm-12 content-div">
+						<textarea rows="" cols="" class="form-control form-control-user"
+						id="exampleLastName" name="content" placeholder="내용" required>${board.content }</textarea>
+                    </div>
+					<!-- 첨부파일 이미지 영역 -->
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									파일들
+								</div>
+								<div class="panel-body">
+									<div class="uploadDiv">
+					                  	<input type="file" name="uploadFile" multiple />
+					                </div>
+									<div class="uploadResult">
+										<ul></ul>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- 첨부파일 이미지 영역 끝 -->
+					<div id="modify-btns">
+						<button class="btn btn-primary btn-user" onclick="location.href='/board/review?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
+                        <button type="submit" class="btn btn-primary btn-user" >등록</button>
+						<button type="reset" class="btn btn-primary btn-user" >취소</button>
+                    </div>
 				</div>
-				<!-- 첨부파일 이미지 영역 끝 -->
+				
 				</form>
 				</div>
 			</div>

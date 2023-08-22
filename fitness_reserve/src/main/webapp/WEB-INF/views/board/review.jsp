@@ -44,41 +44,58 @@
                                 	</c:otherwise>
                                 </c:choose>
                                 </table>
-                                <!-- 검색추가하기 -->
-								<form method="get" action="/board/review">
-								
-								<select name="type">
-									<option value="T" <c:out value="${pageMaker.cri.type == 'T' ? 'selected' : ''}"/>>제목</option>
-									<option value="C" <c:out value="${pageMaker.cri.type == 'C' ? 'selected' : ''}"/>>내용</option>
-									<option value="W" <c:out value="${pageMaker.cri.type == 'W' ? 'selected' : ''}"/>>글쓴이</option>
-								</select>
-								<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
-								<input type="submit" value="검색">
-								</form> 
-								<!-- 페이징 추가 -->
-								<div class="pull-right">
-									<ul class="pagination">
-										<c:if test="${pageMaker.prev }">
-											<li>
-												<a href="/board/review?pageNum=${pageMaker.startPage-1 }&amount=10&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">prev</a>
-											</li>
-										</c:if>
-										<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-											<li>
-												<a href="/board/review?pageNum=${num }&amount=10&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${num }</a>
-											</li>
-										</c:forEach>
-										<c:if test="${pageMaker.next }">
-											<li>
-												<a href="/board/review?pageNum=${pageMaker.endPage+1 }&amount=10&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">next</a>
-											</li>
-										</c:if>
-									</ul>
-								</div>
-								<!-- 페이징 추가 끝 -->
-                                <sec:authorize access="isAuthenticated()">
-                                	<a href="/board/register" class="review-write-btn">글쓰기</a>
-                                </sec:authorize>
+                                <div class="board-btm">
+                                	<div class="search-div">
+                                		<!-- 검색추가하기 -->
+										<form method="get" action="/board/review">
+										
+										<select name="type">
+											<option value="T" <c:out value="${pageMaker.cri.type == 'T' ? 'selected' : ''}"/>>제목</option>
+											<option value="C" <c:out value="${pageMaker.cri.type == 'C' ? 'selected' : ''}"/>>내용</option>
+											<option value="W" <c:out value="${pageMaker.cri.type == 'W' ? 'selected' : ''}"/>>글쓴이</option>
+										</select>
+										<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
+										<input type="submit" value="검색">
+										</form> 
+                                	</div>
+                                	<div class="paging-div">
+	                                	<!-- 페이징 추가 -->
+										<div class="pull-right">
+											<ul class="pagination">
+												<c:if test="${pageMaker.prev }">
+													<li>
+														<a href="/board/review?pageNum=${pageMaker.startPage-1 }&amount=10&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">prev</a>
+													</li>
+												</c:if>
+												<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+												<c:choose>
+												<c:when test="${pageMaker.cri.pageNum eq num }">
+													<li>
+														<span>${num }</span>
+													</li>
+												</c:when>
+												<c:otherwise>
+													<li>
+														<a href="/board/review?pageNum=${num }&amount=10&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${num }</a>
+													</li>
+												</c:otherwise>
+												</c:choose>
+												</c:forEach>
+												<c:if test="${pageMaker.next }">
+													<li>
+														<a href="/board/review?pageNum=${pageMaker.endPage+1 }&amount=10&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">next</a>
+													</li>
+												</c:if>
+											</ul>
+										</div>
+										<!-- 페이징 추가 끝 -->
+                                	</div>
+                                	<sec:authorize access="isAuthenticated()">
+                                		<a href="/board/register" class="review-write-btn">글쓰기</a>
+                               		</sec:authorize>
+                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>

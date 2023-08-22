@@ -87,8 +87,7 @@
                     <div class="navbar-nav">
                         <a href="/" class="nav-item nav-link active">홈</a>
                         <a href="/About" class="nav-item nav-link">짐 투어</a>
-                        <a href="service.html" class="nav-item nav-link">이용요금 및 예약</a>
-                        <a href="project.html" class="nav-item nav-link">이용안내</a>
+                        <a href="/reserve/reservation" class="nav-item nav-link">이용요금 및 예약</a>
                         <a href="/board/review" class="nav-item nav-link">후기게시판</a>
                         <a href="/Contact" class="nav-item nav-link">위치 및 연락처</a>
                         
@@ -105,7 +104,8 @@
 								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 								<label><sec:authentication property="principal.username"/>님&nbsp;</label><button id="logoutBtn">로그아웃</button>
 							</form>
-                        	
+							<sec:authentication property="principal.member" var="principal"/>
+							<a href="/reserve/myreserve?mno=${principal.mno }">예약내역</a>
                         </sec:authorize>
                     </div>
                 </div>

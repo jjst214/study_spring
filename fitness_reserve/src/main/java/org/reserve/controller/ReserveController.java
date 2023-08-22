@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.reserve.domain.Criteria;
 import org.reserve.domain.PaymentVO;
 import org.reserve.domain.ReserveVO;
 import org.reserve.service.ReserveService;
@@ -113,5 +114,11 @@ public class ReserveController {
 		service.addReserve(rvos, pvos);
 		
 		return "redirect: /";
+	}
+	
+	@GetMapping("/myreserve")
+	public void viewList(int mno, Criteria cri, Model model) {
+		//해당 유저의 예약정보 담아서 리턴
+		model.addAttribute("list", service.getUserReserves(mno, cri));
 	}
 }

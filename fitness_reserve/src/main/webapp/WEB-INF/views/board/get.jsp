@@ -15,7 +15,23 @@
 				<strong><c:out value="${board.title }"></c:out></strong>
 				<p style="border-bottom:1px solid #ccc;"><c:out value="${board.writer }"></c:out>&emsp;|&emsp;<fmt:formatDate value="${board.updatedate }" pattern="yyyy-MM-dd HH:mm"/></p>
 				<p id="content_image"></p>
-				<p><c:out value="${board.content }"></c:out></p>
+				<p id="get-content"><c:out value="${board.content }"></c:out></p>
+				<!-- 첨부파일 이미지 영역 -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading" id="get-file">
+								첨부사진
+							</div>
+							<div class="panel-body" id="get-fileview">
+								<div class="uploadResult">
+									<ul></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 첨부파일 이미지 영역 끝 -->
 				<div class="getbtns">
 					<button onclick="location.href='/board/review?pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">목록</button>
 					<!-- 변수등록 -->
@@ -25,6 +41,7 @@
 					<c:if test="${pinfo.username eq board.writer}">
 					<button class="modify-btn" onclick="location.href='/board/modify?bno=${board.bno}&pageNum=${cri.pageNum}&amount=${cri.amount }&type=${cri.type}&keyword=${cri.keyword}'">수정</button>
 					</c:if>
+					<!-- 작성자 본인 또는 관리자 권한을 가진 관리자는 게시글 삭제가능 -->
 					<c:if test="${pinfo.username eq board.writer or pinfo.authorities eq '[ROLE_MEMBER]' or pinfo.authorities eq '[ROLE_ADMIN]'}">
 					<form method="post" action="/board/remove">
 						<input type="hidden" value="${board.bno }" name="bno"/>
@@ -34,22 +51,6 @@
 					</c:if>
 					</sec:authorize>
 				</div>
-				<!-- 첨부파일 이미지 영역 -->
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								파일들
-							</div>
-							<div class="panel-body">
-								<div class="uploadResult">
-									<ul></ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 첨부파일 이미지 영역 끝 -->
 				</div>
 			</div>
 		</div>

@@ -5,11 +5,19 @@
 	<select id="getInfo" resultType="org.reserve.domain.ReserveVO">
 		select fno, finfo from fitness where fno = #{fno}
 	</select>
+	
 	 <insert id="insertReserve">
 	 	insert into reserve(rno, fno, rdate, rstart, rend, mno)
 	 	 values(seq_rno.nextval, #{fno}, #{rdate}, #{rstart}, #{rend}, #{mno})
 	 </insert>
+	 
 	 <select id="allReserveList" resultType="org.reserve.domain.ReserveVO">
 	 	select * from reserve where rdate = #{rdate} and fno = #{fno}
+	 </select>
+	 
+	 <select id="getUserReserve" resultType="org.reserve.domain.ReserveVO">
+	 	select * from (select Tb.*, rownum rNum from(select * from reserve
+		 where mno=#{mno} order by rdate desc) Tb) 
+		  where rNum between (#{pageNum}-1)*#{amount}+1 and #{pageNum} * #{amount}
 	 </select>
 </mapper>

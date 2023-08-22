@@ -14,6 +14,7 @@ public class ReserveVO {
 	private String rstart;
 	private String rend;
 	private int mno;
+	private int rnum;
 	
 	private String finfo;
 	private List<ReserveVO> rvoList;

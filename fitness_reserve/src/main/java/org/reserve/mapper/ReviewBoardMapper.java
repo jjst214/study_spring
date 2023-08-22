@@ -31,7 +31,4 @@ public interface ReviewBoardMapper {
 	//insert메소드2 등록된 번호 받기
 	public void insertSelectKey(ReviewBoardVO vo);
 	
-	//검색 연습
-	//Map<키:String, 값:Map타입>
-	public List<ReviewBoardVO> searchTest(Map<String, Map<String, String>> map);
 }
