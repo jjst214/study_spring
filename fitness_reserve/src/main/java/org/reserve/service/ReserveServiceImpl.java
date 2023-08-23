@@ -2,7 +2,10 @@ package org.reserve.service;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.reserve.domain.Criteria;
 import org.reserve.domain.PaymentVO;
@@ -11,7 +14,6 @@ import org.reserve.mapper.PaymentMapper;
 import org.reserve.mapper.ReserveMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -50,8 +52,8 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<ReserveVO> getUserReserves(int mno, Criteria cri) {
-		return rmapper.getUserReserve(mno, cri);
+	public List<ReserveVO> getUserReserves(int mno) {
+		return rmapper.getUserReserve(mno);
 	}
 	
 }

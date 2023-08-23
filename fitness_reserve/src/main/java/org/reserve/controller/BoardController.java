@@ -11,6 +11,7 @@ import org.reserve.domain.Criteria;
 import org.reserve.domain.PageDTO;
 import org.reserve.domain.ReviewBoardVO;
 import org.reserve.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -34,6 +36,7 @@ import lombok.extern.log4j.Log4j;
 //의존성 주입
 @AllArgsConstructor
 public class BoardController {
+	@Setter(onMethod_ = {@Autowired}) 
 	private BoardService service;
 	//게시글 리스트
 	@GetMapping("/review")

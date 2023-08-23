@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.reserve.domain.Criteria;
 import org.reserve.domain.PaymentVO;
 import org.reserve.domain.ReserveVO;
 import org.reserve.service.ReserveService;
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.Setter;
@@ -70,9 +68,7 @@ public class ReserveController {
 	public ResponseEntity<List<ReserveVO>> reserveList(Date rdate, int fno){
 		ReserveVO rvo = new ReserveVO();
 		ReserveVO info = service.getInfo(fno);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String strDate = sdf.format(rdate);
-		rvo.setRdate(strDate);
+		rvo.setRdate(rdate);
 		rvo.setFno(fno);
 		rvo.setFinfo(info.getFinfo());
 		log.info(info.getFinfo());
@@ -117,8 +113,8 @@ public class ReserveController {
 	}
 	
 	@GetMapping("/myreserve")
-	public void viewList(int mno, Criteria cri, Model model) {
+	public void viewList(int mno, Model model) {
 		//해당 유저의 예약정보 담아서 리턴
-		model.addAttribute("list", service.getUserReserves(mno, cri));
+		model.addAttribute("list", service.getUserReserves(mno));
 	}
 }
