@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<title>GREEN GYM</title>
 <%@ include file="../includes/header.jsp" %>
 
 <div class="container">
@@ -8,7 +7,9 @@
 	<div>
 		<form action="/reserve/reservation" method="post" id="reserveForm">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-		<input type="hidden" name="mno" value="<sec:authentication property="principal.member.mno"/>" />
+		<sec:authorize access="isAuthenticated()">
+			<input type="hidden" name="mno" value="<sec:authentication property="principal.member.mno"/>" />
+		</sec:authorize>
 		<div class="select-Room">
 			<h2 class="subtitle">헬스 룸</h2>
 			<select name="fno" id="fno">
@@ -24,7 +25,7 @@
 			</select>
 		</div>
 		<div class="reserve-calendar">
-			<h2 class="subtitle">예약일</h2>
+			<h2 class="subtitle">예약일정<span style="font-style:16px;">&nbsp;※당일 예약은 불가합니다.</span></h2>
 			<input type="date" name="rdate" id="rdate"/>
 			<div class="time_booking">
 				<ul class="reserveForm">
@@ -141,12 +142,6 @@
 	//security token
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue = "${_csrf.token}";
-	//오늘 날짜 기본세팅
-	/*
-	let defaultDate = new Date();
-	defaultDate.setDate(defaultDate.getDate() + 1);
-	document.querySelector('input[name="rdate"]').valueAsDate = defaultDate;
-	*/
 	//과거+당일 예약 날짜 선택시 예약불가
 	let prevDate;
 	$("input[name='rdate']").on("click", function(){
@@ -260,6 +255,7 @@
 	$('input[type="submit"]').on('click', function(e){
 		e.preventDefault();
 		let form = $('#reserveForm');
+		let token = "${principal.mno}";
 		let rstart = [];
 		if($('.on').length == 0 || $('.on') == null){
 			alert('선택 옵션을 확인해주세요');
@@ -273,6 +269,9 @@
 		
 		let str = "";
 		str += "<input type='hidden' name='rstart' value='"+rstart+"'/>";
+		if(token == null || token == ''){
+			alert('로그인 후 이용가능합니다.');	
+		}
 		form.append(str).submit();
 	});
 	

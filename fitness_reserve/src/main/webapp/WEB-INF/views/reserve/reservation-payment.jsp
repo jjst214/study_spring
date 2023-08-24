@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<title>GREEN GYM</title>
 <%@ include file="../includes/header.jsp" %>
 <div class="container">
 	<h2 class="title">RESERVATION</h2>
@@ -104,6 +103,10 @@
 	});
 	$('input[type="submit"]').on('click', function(e){
 		e.preventDefault();
+		if($('input[type="radio"]:checked').val() == '신용카드' && $('select[name="pbank"]').val() == 'none'){
+			alert('결제하실 카드를 선택해주세요');
+			return;
+		}
 		let form = $('#paymentForm');
 		let str = "";
 		str += "<input type='hidden' name='pdate' value='"+${rvo[0].rdate}+"'/>";

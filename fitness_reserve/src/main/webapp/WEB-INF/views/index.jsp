@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="includes/header.jsp" %>
-<title>GREEN GYM</title>
 
     <!-- Carousel Start -->
     <div class="container-fluid px-0 mb-5">
@@ -18,7 +17,7 @@
                                     </p>
                                     <h1 class="display-4 text-white animated slideInRight">프라이빗한 공간에서 <br>최고의 운동을 경험하다</h1>
                                     <a href="/reserve/reservation"
-                                        class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight">지금 예약하기</a>
+                                        class="btn py-3 px-5 animated slideInRight reserve-btn">지금 예약하기</a>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +33,7 @@
                                     </p>
                                     <h1 class="display-4 text-white animated slideInLeft">프라이빗한 공간에서 <br>최고의 운동을 경험하다</h1>
                                     <a href="/reserve/reservation"
-                                        class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">지금 예약하기</a>
+                                        class="btn py-3 px-5 animated slideInLeft reserve-btn">지금 예약하기</a>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +54,7 @@
 
 
     <!-- About Start -->
-    <div class="container-xxl about my-5">
+    <div class="container-xxl about my-5" id="About">
         <div class="container">
             <div class="row g-0">
                 <div class="col-lg-6">
@@ -112,7 +111,7 @@
 
 
     <!-- Service Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5" id="Our">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <p class="fs-5 fw-medium text-primary">Our Services</p>
@@ -176,7 +175,7 @@
                                 <img class="img-fluid" src="resources/img/icon/weight-lifting.png" alt="Icon">
                             </div>
                             <h5 class="mb-3">개인 퍼스널 트레이닝</h5>
-                                <p class="mb-0">어반 프라이빗짐은 퍼스널 트레이닝을 제공하고 있지 않으므로, 프리랜서 트레이너가
+                                <p class="mb-0">그린 프라이빗짐은 퍼스널 트레이닝을 제공하고 있지 않으므로, 프리랜서 트레이너가
                                  개인별 고객과 대관 장소에서 자유롭게 수업을 진행할 수 있습니다.</p>
                         </div>
                     </div>

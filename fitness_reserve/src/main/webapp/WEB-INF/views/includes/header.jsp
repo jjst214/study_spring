@@ -38,6 +38,7 @@
     <link href="/resources/css/main.css" rel="stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>GREEN PRIVATE GYM</title>
 </head>
 
 <body>

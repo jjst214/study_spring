@@ -17,6 +17,6 @@
  
  <select id="getUserReserve" resultType="org.reserve.domain.ReserveVO">
  	select * from (select Tb.*, rownum rNum from(select * from reserve
-	 where mno=#{mno} order by rdate desc) Tb) where rNum between 1 and 10
+	 where mno=#{mno} order by rdate desc) Tb) where rNum between 1 and 20
  </select>
 </mapper>

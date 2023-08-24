@@ -33,7 +33,6 @@ public class ReserveController {
 	private ReserveService service;
 	
 	@GetMapping("/reservation")
-	@PreAuthorize("isAuthenticated()")
 	public void doReserve()  {
 		
 	}
@@ -65,13 +64,15 @@ public class ReserveController {
 	
 	@PostMapping("/selectDate")
 	@ResponseBody
-	public ResponseEntity<List<ReserveVO>> reserveList(Date rdate, int fno){
+	public ResponseEntity<List<ReserveVO>> reserveList(Date rdate, int fno) throws ParseException{
 		ReserveVO rvo = new ReserveVO();
 		ReserveVO info = service.getInfo(fno);
-		rvo.setRdate(rdate);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = sdf.format(rdate);
+		log.info(strDate);
+		rvo.setRdate(strDate);
 		rvo.setFno(fno);
 		rvo.setFinfo(info.getFinfo());
-		log.info(info.getFinfo());
 		return new ResponseEntity<>(service.accessReserve(rvo), HttpStatus.OK);
 	}
 	
@@ -113,6 +114,7 @@ public class ReserveController {
 	}
 	
 	@GetMapping("/myreserve")
+	@PreAuthorize("isAuthenticated()")
 	public void viewList(int mno, Model model) {
 		//해당 유저의 예약정보 담아서 리턴
 		model.addAttribute("list", service.getUserReserves(mno));

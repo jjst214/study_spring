@@ -1,13 +1,22 @@
 @charset "UTF-8";
-li{list-style:none;}
-textarea{
-	resize:none;
-}
+html { scroll-behavior: smooth; }
+li{ list-style:none; }
+textarea{ resize:none; }
 /* header.jsp */
 #logoutBtn{
 	border:none;
 	background-color:transparent;
 	outline:none;
+}
+/* index.jsp */
+.reserve-btn{
+	border:2px solid #fff;
+	color:#fff;
+}
+.reserve-btn:hover{
+	transition:0.3s;
+	background:rgba(255,255,255,0.2);
+	color:#fff;
 }
 /* About.jsp */
 .about-txt{
@@ -145,6 +154,9 @@ textarea{
 	font-size:24px;
 	padding:25px 0;
 }
+.subtitle>span{
+	font-size:18px;
+}
 .select-Room{
 	border-bottom:1px solid #ccc;
 }
@@ -156,8 +168,11 @@ textarea{
 	position:relative;
 	display:flex;
 }
+#rdate{
+	margin-left:85px;
+}
 .time_booking{
-	padding:20px 0;
+	padding:40px 50px;
 }
 .item{
 	width:44px;
@@ -278,4 +293,39 @@ textarea{
 }
 .reg-btns button:first-child{
 	margin-right: 5px;
+}
+
+/* myreserve.jsp */
+.res-label{
+	width:100%;
+	text-align:center;
+}
+.view-res-tb{
+	margin:20px auto;
+	text-align:center;
+}
+.view-res-tb tr{
+	border-bottom:1px solid #ddd;
+	line-height:30px;
+}
+.view-res-tb th{
+	height:30px;
+}
+.view-res-tb th:nth-child(1){
+	width:70px;
+}
+.view-res-tb th:nth-child(2){
+	width:100px;
+}
+.view-res-tb th:nth-child(3){
+	width:130px;
+}
+.view-res-tb th:nth-child(4){
+	width:110px;
+}
+.view-res-tb th:nth-child(5){
+	width:110px;
+}
+.view-res-tb th:nth-child(6){
+	width:80px;
 }
