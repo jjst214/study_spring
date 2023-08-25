@@ -31,7 +31,7 @@ public class Car {
 	//@Column(name="exdesc", nullable = false, length = 512)
 	//private String desc;
 	public Car() {}
-	public Car(String brand, String model, String color, String registerNumber, int year, int price) {
+	public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner) {
 		super();
 		this.brand = brand;
 		this.model = model;
@@ -39,6 +39,7 @@ public class Car {
 		this.registerNumber = registerNumber;
 		this.year = year;
 		this.price = price;
+		this.owner = owner;
 	}
 	//getter, setter
 	public long getId() {
@@ -82,6 +83,12 @@ public class Car {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public Owner getOwner() {
+		return owner;
+	}
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 	
 	

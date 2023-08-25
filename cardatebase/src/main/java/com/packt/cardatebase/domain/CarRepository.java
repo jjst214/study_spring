@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 //Car 엔티티 클래스의 리포지토리이다.
 //ID필드 형식은 Long타입이다.
+@RepositoryRestResource
 public interface CarRepository extends CrudRepository<Car, Long> {
 	//브랜드로 자동차를 검색
 	//@Query어노테이션 이용하면 SQL문으로 쿼리를 만들 수 있음

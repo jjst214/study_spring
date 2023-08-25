@@ -9,7 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,10 +22,12 @@ public class Owner {
 	//cascade속성은 삭제 또는 업데이트시 연속 효과가 적용되는 방법을 지정
 	//ALL : 모든작업이 연속 효과 적용
 	//ex> 소유자 삭제시 연관도니 자동차 레코드도 같이 삭제
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private List<Car> cars;
 	
 	public Owner() {}
+	
 	public Owner(String firstname, String lastname) {
 		super();
 		this.firstname = firstname;
@@ -45,6 +51,12 @@ public class Owner {
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	public List<Car> getCars() {
+		return cars;
+	}
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
 	}
 	
 }
