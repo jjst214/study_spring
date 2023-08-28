@@ -22,4 +22,8 @@ public class CarController {
 	public Iterable<Car> getSearchCars(String brand){
 		return repository.findByBrand(brand);
 	}
+	@RequestMapping("/searchcolor")
+	public Iterable<Car> getSearchColor(String color){
+		return repository.findByColor(color);
+	}
 }

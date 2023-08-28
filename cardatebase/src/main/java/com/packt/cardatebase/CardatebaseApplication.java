@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.packt.cardatebase.domain.Car;
 import com.packt.cardatebase.domain.CarRepository;
 import com.packt.cardatebase.domain.Owner;
 import com.packt.cardatebase.domain.OwnerRepository;
+import com.packt.cardatebase.domain.User;
+import com.packt.cardatebase.domain.UserRepository;
 
 //@EnableAutoConfiguration : 스프링부트 자동 구성을 활성화
 //@ComponentScan : 스프링부트 컴포넌트 검색으로 애플리케이션의 컴포넌트를 찾음
@@ -30,6 +33,11 @@ public class CardatebaseApplication implements CommandLineRunner {
 	//소유자 리포지토리 의존주입
 	@Autowired
 	private OwnerRepository orepository;
+	
+	@Autowired
+	private UserRepository urepository;
+	
+	private BCryptPasswordEncoder pwencoder = new BCryptPasswordEncoder();
 	
 	public static void main(String[] args) {
 		//코드를 추가하면 애플리케이션이 재시작됨
@@ -50,9 +58,13 @@ public class CardatebaseApplication implements CommandLineRunner {
 		repository.save(new Car("Hyundai", "Grandeur", "black", "DFA-1231", 2022, 32000, owner3));
 		
 		//모든 레코드를 가지고와서 콘솔에 로깅
-		 for(Car car: repository.findAll()) {
+		 for(Car car: repository.findByBrand("Hyundai")) {
 			logger.info(car.getBrand()+ " " + car.getModel());
 		}
+		
+		//사용자이름 user 암호 user
+		urepository.save(new User("user", pwencoder.encode("user"),"USER"));
+		urepository.save(new User("admin", pwencoder.encode("admin"),"ADMIN"));
 	}
-
+	
 }
