@@ -10,7 +10,7 @@
 		<form action="/login" method="post" >
 			<p><input type="text" name="username" placeholder="아이디" class="input-idpw"/></p>
 			<p><input type="password" name="password" placeholder="비밀번호" class="input-idpw"/></p>
-			<p><input type="checkbox" name="remember-me"/>Remember Me</p>		
+			<input type="hidden" name="remember-me" value="true"/>		
 			<button type="submit">로그인</button>
 			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 		</form>
