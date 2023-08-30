@@ -1,6 +1,5 @@
 package com.packt.cardatebase.web;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -24,22 +23,22 @@ public class LoginController {
 	AuthenticationManager authenticationManager;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials){
-		//토큰을 생성하고 응답의 Authorization헤더로 보냄
+	public ResponseEntity<?> getToken(@RequestBody AccountCredentials 
+			credentials){
+		//username과 password를 이용한 인증 
 		UsernamePasswordAuthenticationToken creds = 
-				new UsernamePasswordAuthenticationToken(credentials.getUsername(), 
-credentials.getPassword());
+				new UsernamePasswordAuthenticationToken(
+						credentials.getUsername(), credentials.getPassword());
 		Authentication auth = authenticationManager.authenticate(creds);
-		//토큰 생성
+		//토큰생성
 		String jwts = jwtService.getToken(auth.getName());
 		//생성된 토큰으로 응답을 설정
 		return ResponseEntity.ok()
-				.header(HttpHeaders.AUTHORIZATION, "Bearer" + jwts)
-				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,"Authorization")
+				.header(HttpHeaders.AUTHORIZATION, "Bearer"+jwts)
+				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,
+						"Authorization")
 				.build();
+		
+		
 	}
-	
-	
 }
-
-

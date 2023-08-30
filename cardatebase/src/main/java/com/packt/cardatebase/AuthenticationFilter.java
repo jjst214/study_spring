@@ -1,6 +1,6 @@
 package com.packt.cardatebase;
 
-import java.io.IOException;
+import java.io.IOException;import java.util.Collection;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.packt.cardatebase.service.JwtService;
+
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
 	@Autowired
@@ -24,20 +25,19 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		//Authorization 헤더에서 토큰을 가져옴
-		String jws=request.getHeader(HttpHeaders.AUTHORIZATION);
-		if(jws != null) {
+		//헤더에서 토큰 가져오기 
+		String jws = request.getHeader(HttpHeaders.AUTHORIZATION);
+		if(jws!=null) {
 			//토큰을 확인하고 사용자를 얻음
 			String user = jwtService.getAuthUser(request);
 			//인증객체 생성
-			Authentication authentication = 
-					new UsernamePasswordAuthenticationToken(user, null, java.util.Collections.emptyList());
+			Authentication authentication =
+					new UsernamePasswordAuthenticationToken(user, null,
+							java.util.Collections.emptyList());
 			SecurityContextHolder.getContext()
 			.setAuthentication(authentication);
-			
 		}
 		filterChain.doFilter(request, response);
-		
 	}
 	
 }

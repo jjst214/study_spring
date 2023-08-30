@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.packt.cardatebase.domain.Car;
 import com.packt.cardatebase.domain.CarRepository;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class CarController {
 	@Autowired
@@ -20,10 +19,12 @@ public class CarController {
 	}
 	@RequestMapping("/searchcars")
 	public Iterable<Car> getSearchCars(String brand){
+		//자동차를 검색해서 반환
 		return repository.findByBrand(brand);
 	}
 	@RequestMapping("/searchcolor")
 	public Iterable<Car> getSearchColor(String color){
+		//자동차를 검색해서 반환
 		return repository.findByColor(color);
 	}
 }

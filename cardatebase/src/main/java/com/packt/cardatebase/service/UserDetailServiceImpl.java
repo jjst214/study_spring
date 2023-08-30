@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.packt.cardatebase.domain.User;
 import com.packt.cardatebase.domain.UserRepository;
+
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 	@Autowired
@@ -20,7 +21,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<User> user = repository.findByUsername(username);
 		UserBuilder builder = null;
-		//user가 있으면 isPresent 객체가 존재하는지 확인
+		//user가 있으면 isPresent 객체가 존재하는지 확인 
 		//있으면 true null이면 false리턴
 		if(user.isPresent()) {
 			User currentUser = user.get();
@@ -34,6 +35,5 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		//UserDetails타입을 리턴해줌
 		return builder.build();
 	}
-	
 	
 }

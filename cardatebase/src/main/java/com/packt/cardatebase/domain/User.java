@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "`user`")
+@Table(name="`user`")
 public class User {
 	//기본키, 자동생성
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	//not null, unique
+	//not null, 중복 허용하지 않음
 	@Column(nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false)
@@ -29,7 +29,6 @@ public class User {
 		this.password = password;
 		this.role = role;
 	}
-	
 	public Long getId() {
 		return id;
 	}
