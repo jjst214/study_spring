@@ -12,4 +12,6 @@ public interface ReserveService {
 	public List<ReserveVO> accessReserve(ReserveVO rvo);
 	
 	public List<ReserveVO> getUserReserves(int mno);
+
+	public int autoUpdate();
 }

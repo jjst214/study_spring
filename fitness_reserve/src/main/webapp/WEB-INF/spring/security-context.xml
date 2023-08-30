@@ -18,7 +18,7 @@
 		<security:intercept-url pattern="/sample/all" access="permitAll"/>
 		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
 		<security:form-login login-page="/customLogin" />
-		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="600" />
 		<!-- 로그아웃시 세션삭제, 쿠키삭제 -->
 		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me, JSESSION_ID"/>
 	</security:http>

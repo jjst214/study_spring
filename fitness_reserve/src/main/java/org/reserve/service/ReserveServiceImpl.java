@@ -50,5 +50,12 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<ReserveVO> getUserReserves(int mno) {
 		return rmapper.getUserReserve(mno);
 	}
+
+	@Override
+	public int autoUpdate() {
+		int result = rmapper.updateStatus();
+		System.out.println(result + "건의 업데이트 완료");
+		return result;
+	}
 	
 }

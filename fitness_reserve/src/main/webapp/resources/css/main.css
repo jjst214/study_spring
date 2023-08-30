@@ -296,9 +296,18 @@ textarea{ resize:none; }
 }
 
 /* myreserve.jsp */
+#reserveDiv{
+	position:relative;
+}
+#res-infolabel{
+	width:100%;
+	text-align:center;
+}
 .res-label{
 	width:100%;
 	text-align:center;
+	position:absolute;
+	top:80px;
 }
 .view-res-tb{
 	margin:20px auto;

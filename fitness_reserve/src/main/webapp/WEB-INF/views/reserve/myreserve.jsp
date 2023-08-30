@@ -4,7 +4,7 @@
 
 <c:set value="${list }" var="lists"/>
 
-<div class="container">
+<div class="container" id="reserveDiv">
 	<h3 class="title">예약내역</h3>
 	<label class="res-label">최근 20건 까지의 예약 내역을 확인하실 수 있습니다.</label>
 	<div>
@@ -67,6 +67,7 @@
 			</tr>
 			</c:forEach>
 		</table>
+		<label id="res-infolabel">※3달 이상 경과된 예약건은 문의를 통해 확인 하실 수 있습니다.</label>
 	</div>
 </div>
 

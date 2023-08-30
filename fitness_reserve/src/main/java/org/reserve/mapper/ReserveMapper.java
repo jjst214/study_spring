@@ -12,4 +12,5 @@ public interface ReserveMapper {
 	
 	public List<ReserveVO> getUserReserve(int mno);
 	
+	public int updateStatus();
 }
