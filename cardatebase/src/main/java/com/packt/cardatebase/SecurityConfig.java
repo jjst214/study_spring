@@ -70,21 +70,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//csrf비활성화 
 	protected void configure(HttpSecurity http) throws Exception {
 		//모든 요청을 보호되지 않게(권한이 필요없게) 정의
-		http.csrf().disable().cors().and()
-		.authorizeRequests().anyRequest().permitAll();
 //		http.csrf().disable().cors().and()
-//		.sessionManagement()
-//		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//		.authorizeRequests()
-//		///login엔드 포인트에 대한 요청은 보호하지 않음
-//		.antMatchers(HttpMethod.POST, "/login").permitAll()
-//		//다른요청은 보호됨
-//		.anyRequest().authenticated().and()
-//		//예외처리 설정
-//		.exceptionHandling()
-//		.authenticationEntryPoint(exceptionHandler).and()
-//		.addFilterBefore(authenticationFilter, 
-//				UsernamePasswordAuthenticationFilter.class);
+//		.authorizeRequests().anyRequest().permitAll();
+		
+		http.csrf().disable().cors().and()
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		.authorizeRequests()
+		///login엔드 포인트에 대한 요청은 보호하지 않음
+		.antMatchers(HttpMethod.POST, "/login").permitAll()
+		//다른요청은 보호됨
+		.anyRequest().authenticated().and()
+		//예외처리 설정
+		.exceptionHandling()
+		.authenticationEntryPoint(exceptionHandler).and()
+		.addFilterBefore(authenticationFilter, 
+				UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	
