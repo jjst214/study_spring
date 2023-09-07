@@ -29,7 +29,7 @@ public class TourController {
 	//조회하고 싶은 날짜의 시간
 	String Hour = "24";
 	//조회할 날짜로부터 몇일간의 데이터를 보여줄것인지
-	String Day = "7";
+	String Day = "6";
 	//관광코스ID
 	//String CourseId = "2";
 	//한페이지 결과 수
