@@ -15,7 +15,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class CommonController {
-	private MemberService service;
 	
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
